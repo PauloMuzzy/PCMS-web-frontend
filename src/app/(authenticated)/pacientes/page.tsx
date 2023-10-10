@@ -1,6 +1,5 @@
 'use client'
 
-import { PeopleIcon } from '@/Icons'
 import { PatientRegistrationForm } from '@/components'
 
 import {
@@ -18,7 +17,6 @@ export default function PatientsPage() {
         <NavbarContent justify="start">
           <NavbarItem>
             <Button
-              as={Link}
               color="primary"
               onClick={() => console.log('click')}
               variant="light"
@@ -28,7 +26,6 @@ export default function PatientsPage() {
           </NavbarItem>
         </NavbarContent>
       </Navbar>
-
       <PatientRegistrationForm />
     </div>
   )

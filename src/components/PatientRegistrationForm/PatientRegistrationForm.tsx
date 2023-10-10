@@ -1,18 +1,15 @@
 'use client'
 
-import classNames from 'classnames'
-import { PeopleIcon } from '@/Icons'
 import { GENDER_OPTIONS } from '@/utils'
 import { useState } from 'react'
 import { Input } from '@nextui-org/react'
 import { Button } from '@nextui-org/react'
-
+import {Select, SelectSection, SelectItem} from "@nextui-org/react";
 import { useForm, SubmitHandler, Controller } from 'react-hook-form'
+import InputMask from "react-input-mask";
 
 export function PatientRegistrationForm() {
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [professionListIsOpen, serProfessionListIsOpen] =
-    useState<boolean>(false)
 
   type Data = {
     name: string
@@ -83,14 +80,13 @@ export function PatientRegistrationForm() {
                 label="Nome"
                 variant="bordered"
                 className="w-full h-fit"
-                isInvalid={!!errors.email?.message}
-                errorMessage={!!errors && errors.email?.message}
+                isInvalid={!!errors.name?.message}
+                errorMessage={!!errors && errors.name?.message}
                 autoComplete="name"
                 {...field}
               />
             )}
           />
-
           <Controller
             name="lastName"
             control={control}
@@ -106,15 +102,14 @@ export function PatientRegistrationForm() {
                 label="Sobrenome"
                 variant="bordered"
                 className="w-full h-fit"
-                isInvalid={!!errors.email?.message}
-                errorMessage={!!errors && errors.email?.message}
+                isInvalid={!!errors.lastName?.message}
+                errorMessage={!!errors && errors.lastName?.message}
                 autoComplete="last-name"
                 {...field}
               />
             )}
           />
         </div>
-
         <div className="row">
           <Controller
             name="email"
@@ -145,6 +140,10 @@ export function PatientRegistrationForm() {
               required: {
                 value: true,
                 message: 'Necessário preencher o CPF!'
+              },
+              pattern: {
+                value: /^[0-9]{3}.?[0-9]{3}.?[0-9]{3}-?[0-9]{2}/,
+                message: 'CPF inválido!'
               }
             }}
             render={({ field }) => (
@@ -153,15 +152,14 @@ export function PatientRegistrationForm() {
                 label="CPF"
                 variant="bordered"
                 className="w-full h-fit"
-                isInvalid={!!errors.email?.message}
-                errorMessage={!!errors && errors.email?.message}
+                isInvalid={!!errors.cpf?.message}
+                errorMessage={!!errors && errors.cpf?.message}
                 autoComplete="cpf"
-                {...field}
+
               />
             )}
           />
         </div>
-
         <div className="row">
           <Controller
             name="birthDate"
@@ -170,6 +168,10 @@ export function PatientRegistrationForm() {
               required: {
                 value: true,
                 message: 'Necessário preencher a data de nascimento!'
+              }, 
+              pattern: {
+                value: /([0-2][0-9]|3[0-1])\/(0[0-9]|1[0-2])\/[0-9]{4}/,
+                message: 'Data de nascimento inválida!'
               }
             }}
             render={({ field }) => (
@@ -178,13 +180,13 @@ export function PatientRegistrationForm() {
                 label="Data de nascimento"
                 variant="bordered"
                 className="w-full h-fit"
-                isInvalid={!!errors.email?.message}
-                errorMessage={!!errors && errors.email?.message}
+                isInvalid={!!errors.birthDate?.message}
+                errorMessage={!!errors && errors.birthDate?.message}
                 autoComplete="birth-date"
                 {...field}
               />
             )}
-          />{' '}
+          />
           <Controller
             name="gender"
             control={control}
@@ -195,20 +197,23 @@ export function PatientRegistrationForm() {
               }
             }}
             render={({ field }) => (
-              <Input
-                type="text"
-                label="Gênero"
-                variant="bordered"
-                className="w-full h-fit"
-                isInvalid={!!errors.email?.message}
-                errorMessage={!!errors && errors.email?.message}
-                autoComplete="gender"
-                {...field}
-              />
+              <Select 
+              label="Selecione um gênero" 
+              className="w-full h-fit"
+              variant="bordered"
+              isInvalid={!!errors.gender?.message}
+              errorMessage={!!errors && errors.gender?.message}
+              {...field}
+            >
+              {GENDER_OPTIONS.map((gender) => (
+                <SelectItem key={gender.value} value={gender.value}>
+                  {gender.label}
+                </SelectItem>
+              ))}
+            </Select>
             )}
           />
         </div>
-
         <div className="row">
           <Controller
             name="profession"
@@ -225,8 +230,8 @@ export function PatientRegistrationForm() {
                 label="Profissão"
                 variant="bordered"
                 className="w-full h-fit"
-                isInvalid={!!errors.email?.message}
-                errorMessage={!!errors && errors.email?.message}
+                isInvalid={!!errors.profession?.message}
+                errorMessage={!!errors && errors.profession?.message}
                 autoComplete="profession"
                 {...field}
               />
@@ -247,15 +252,14 @@ export function PatientRegistrationForm() {
                 label="Escolaridade"
                 variant="bordered"
                 className="w-full h-fit"
-                isInvalid={!!errors.email?.message}
-                errorMessage={!!errors && errors.email?.message}
+                isInvalid={!!errors.education?.message}
+                errorMessage={!!errors && errors.education?.message}
                 autoComplete="education"
                 {...field}
               />
             )}
           />
         </div>
-
         <div className="row">
           <Controller
             name="phone"
@@ -272,8 +276,8 @@ export function PatientRegistrationForm() {
                 label="Celular"
                 variant="bordered"
                 className="w-full h-fit"
-                isInvalid={!!errors.email?.message}
-                errorMessage={!!errors && errors.email?.message}
+                isInvalid={!!errors.phone?.message}
+                errorMessage={!!errors && errors.phone?.message}
                 autoComplete="phone"
                 {...field}
               />
@@ -289,15 +293,14 @@ export function PatientRegistrationForm() {
                 label="Foto"
                 variant="bordered"
                 className="w-full h-fit"
-                isInvalid={!!errors.email?.message}
-                errorMessage={!!errors && errors.email?.message}
+                isInvalid={!!errors.photo?.message}
+                errorMessage={!!errors && errors.photo?.message}
                 autoComplete="photo"
                 {...field}
               />
             )}
           />
         </div>
-
         <div className="flex flex-row gap-6 w-[50%] h-fit ml-auto">
           <Button
             type="button"
@@ -306,7 +309,6 @@ export function PatientRegistrationForm() {
           >
             CANCELAR
           </Button>
-
           <Button
             type="submit"
             isLoading={isLoading}

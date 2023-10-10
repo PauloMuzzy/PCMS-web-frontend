@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation'
 import { PrivateRoute } from '@/components'
 
 import { NextUIProvider } from '@nextui-org/react'
+import { ReactNode } from 'react'
 
 const roboto = Roboto({
   weight: '400',
@@ -16,7 +17,7 @@ const roboto = Roboto({
 export default function RootLayout({
   children
 }: {
-  children: React.ReactNode
+  children: ReactNode
 }) {
   const pathname = usePathname()
   const isPublicRoute = checkIsPublicRoute(pathname)

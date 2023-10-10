@@ -1,9 +1,10 @@
 import { Header, Navbar } from '@/components'
+import { ReactNode } from 'react'
 
 export default function RegisterLayout({
   children
 }: {
-  children: React.ReactNode
+  children: ReactNode
 }) {
   return (
     <section className="w-screen h-screen grid grid-rows-[112px_auto] grid-cols-[min-content_auto]">
