@@ -1,8 +1,8 @@
-import { BACKEND_PATIENT_CREATE_V1, httpClient } from '@/settings'
+import { BACKEND_PATIENT_CREATE_V1, privateHttpClient } from '@/settings'
 
 type Params = {
     name: string,
-    lastName: string,
+    lastname: string,
     email: string,
     gender: string,
     birthdate: string,
@@ -10,17 +10,16 @@ type Params = {
     phone: string,
     profession: string,
     education: string,
-    photo?: string  
+    photo?: string 
 }
 
 export async function createPatient(params: Params) {
   try {
-    const { data } = await httpClient.post<any>(
+    const data = await privateHttpClient.post<any>(
         BACKEND_PATIENT_CREATE_V1,
         params
     )
-    
-    return data
+    return data.status === 201 && true
   } catch (error) {
     throw error
   }
