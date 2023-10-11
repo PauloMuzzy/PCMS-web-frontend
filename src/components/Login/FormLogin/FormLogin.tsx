@@ -3,15 +3,14 @@
 import { useState } from 'react'
 import Cookies from 'universal-cookie'
 
-import { useForm, SubmitHandler, Controller } from 'react-hook-form'
 import { userLogin } from '@/services'
+import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 
 import { SocialLogin } from '@/components'
 import { useRouter } from 'next/navigation'
 
-import { Input } from '@nextui-org/react'
 import { EyeFilledIcon, EyeSlashFilledIcon } from '@/Icons'
-import { Button } from '@nextui-org/react'
+import { Button, Input } from '@nextui-org/react'
 
 export function FormLogin() {
   const [passwordIsVisible, setPasswordIsVisible] = useState<boolean>(false)

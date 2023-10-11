@@ -2,13 +2,7 @@
 
 import { PatientRegistrationForm } from '@/components'
 
-import {
-  Navbar,
-  NavbarContent,
-  NavbarItem,
-  Link,
-  Button
-} from '@nextui-org/react'
+import { Button, Navbar, NavbarContent, NavbarItem } from '@nextui-org/react'
 
 export default function PatientsPage() {
   return (

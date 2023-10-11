@@ -7,5 +7,5 @@ const token = cookies.get('auth_token')
 export const privateHttpClient = axios.create({
   baseURL: ENDPOINT,
   timeout: 5000,
-  headers: {authorization : `Bearer ${token}`}
+  headers: { authorization: `Bearer ${token}` }
 })

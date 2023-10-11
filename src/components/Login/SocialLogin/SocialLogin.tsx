@@ -1,7 +1,5 @@
 'use client'
 
-import { FacebookIcon, GoogleIcon } from '@/Icons'
-
 import { useState } from 'react'
 
 export function SocialLogin() {

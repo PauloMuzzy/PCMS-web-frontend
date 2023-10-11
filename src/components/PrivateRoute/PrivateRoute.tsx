@@ -2,7 +2,7 @@
 
 import { checkUserAuthenticated } from '@/utils'
 import { useRouter } from 'next/navigation'
-import { ReactNode, useCallback, useEffect, useState } from 'react'
+import { ReactNode, useState } from 'react'
 
 type PrivateRouteProps = {
   children: ReactNode
