@@ -1,4 +1,4 @@
-import { NextResponse, NextRequest } from 'next/server'
+import { NextRequest } from 'next/server'
 
 export default function middleware(request: NextRequest) {
   const authToken = request.cookies.get('auth_token')?.value

@@ -8,6 +8,6 @@
   }
 
   .row {
-    @apply flex flex-row gap-6 w-full h-fit;
+    @apply flex flex-row w-full h-fit;
   }
 }

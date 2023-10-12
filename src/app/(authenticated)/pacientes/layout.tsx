@@ -1,11 +1,7 @@
 import { Header, Navbar } from '@/components'
 import { ReactNode } from 'react'
 
-export default function RegisterLayout({
-  children
-}: {
-  children: ReactNode
-}) {
+export default function RegisterLayout({ children }: { children: ReactNode }) {
   return (
     <section className="w-screen h-screen grid grid-rows-[112px_auto] grid-cols-[min-content_auto]">
       <nav className="w-64 h-full row-span-2">
