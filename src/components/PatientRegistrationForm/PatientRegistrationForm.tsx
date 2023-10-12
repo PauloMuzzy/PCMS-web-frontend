@@ -1,11 +1,7 @@
 'use client'
 
 import { createPatient } from '@/services'
-import {
-  GENDER_OPTIONS,
-  PROFESSION_OPTIONS,
-  initialLettersIntoCapitalLetters
-} from '@/utils'
+import { GENDER_OPTIONS, initialLettersIntoCapitalLetters } from '@/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button, Input, Select, SelectItem } from '@nextui-org/react'
 import { useState } from 'react'
@@ -180,7 +176,7 @@ export function PatientRegistrationForm() {
             errorMessage={!!errors && errors.profession?.message}
             {...register('profession')}
           >
-            {PROFESSION_OPTIONS.map((item, index) => (
+            {GENDER_OPTIONS.map((item, index) => (
               <SelectItem key={index} value={item.value}>
                 {item.label}
               </SelectItem>
