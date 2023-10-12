@@ -44,7 +44,7 @@ export function FormLogin() {
         password: data.password
       })
       cookies.set('auth_token', response.data.accessToken)
-      push('/cadastro')
+      push('/pacientes')
     } catch (error) {
       console.log(error)
     } finally {

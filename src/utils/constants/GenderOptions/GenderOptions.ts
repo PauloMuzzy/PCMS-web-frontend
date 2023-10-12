@@ -1,14 +1,14 @@
 export const GENDER_OPTIONS = [
   {
     label: 'Masculino',
-    value: 'male'
+    value: 'M'
   },
   {
     label: 'Feminino',
-    value: 'female'
+    value: 'F'
   },
   {
     label: 'Outro',
-    value: 'other'
+    value: 'O'
   }
 ]
