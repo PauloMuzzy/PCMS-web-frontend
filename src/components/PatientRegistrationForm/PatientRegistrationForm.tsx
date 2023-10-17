@@ -1,17 +1,21 @@
 'use client'
 
 import { createPatient } from '@/services'
-import { GENDER_OPTIONS, initialLettersIntoCapitalLetters } from '@/utils'
+import {
+  GENDER_OPTIONS,
+  PROFESSION_OPTIONS,
+  initialLettersIntoCapitalLetters
+} from '@/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button, Input, Select, SelectItem } from '@nextui-org/react'
-import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useHookFormMask } from 'use-mask-input'
 import { z } from 'zod'
 
-export function PatientRegistrationForm() {
-  const [isLoading, setIsLoading] = useState<boolean>(false)
+import Autocomplete from '@mui/material/Autocomplete'
+import TextField from '@mui/material/TextField'
 
+export function PatientRegistrationForm() {
   const createPatientFormSchema = z.object({
     name: z
       .string()
@@ -65,69 +69,83 @@ export function PatientRegistrationForm() {
   const onSubmit: SubmitHandler<CreatePatientFormData> = async (
     data: CreatePatientFormData
   ): Promise<void> => {
-    setIsLoading(true)
+    // setIsLoading(true)
     try {
       const response = await createPatient(data)
       console.log(response)
     } catch (error) {
       console.log(error)
     } finally {
-      setIsLoading(false)
+      // setIsLoading(false)
     }
   }
+
+  const row = 'flex flex-row justify-between items-start w-full max-h-14'
+  const label = 'flex items-center justify-start w-64 h-full font-medium'
 
   return (
     <div className="flex flex-col justify-start items-center gap-4 max-w-[1024px] w-full h-fit bg-token-white rounded-lg shadow-xl p-6">
       <form
-        className="flex flex-col gap-6 w-full h-fit"
+        className="flex flex-col gap-8 w-full h-fit p-8"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div className="row gap-6">
+        <h1 className="text-3xl text-token-primary font-bold">
+          Cadastro de Paciente
+        </h1>
+        <div className={row}>
+          <label className={label}>Nome</label>
           <Input
             type="text"
-            label="Nome"
             placeholder="ex: Jhon"
             variant="bordered"
             className="w-full h-fit"
+            radius="sm"
             size="lg"
             isInvalid={!!errors.name?.message}
             errorMessage={!!errors && errors.name?.message}
             autoComplete="name"
             {...register('name')}
           />
+        </div>
+        <div className={row}>
+          <label className={label}>Sobrenome</label>
           <Input
             type="text"
-            label="Sobrenome"
             placeholder="ex: Silva"
             variant="bordered"
             className="w-full h-fit"
             size="lg"
+            radius="sm"
             isInvalid={!!errors.lastname?.message}
             errorMessage={!!errors && errors.lastname?.message}
             autoComplete="last-name"
             {...register('lastname')}
           />
         </div>
-        <div className="row gap-6">
+        <div className={row}>
+          <label className={label}>E-mail</label>
           <Input
             type="text"
-            label="E-mail"
             placeholder="ex: paciente@pcms.com"
             variant="bordered"
             className="w-full h-fit"
             size="lg"
+            radius="sm"
             isInvalid={!!errors.email?.message}
             errorMessage={!!errors && errors.email?.message}
             autoComplete="email"
             {...register('email')}
           />
+        </div>
+        <div className={row}>
+          <label className={label}>CPF</label>
           <Input
             type="text"
-            label="CPF"
             placeholder="ex: 999.999.999-99"
             variant="bordered"
             className="w-full h-full"
             size="lg"
+            radius="sm"
             isInvalid={!!errors.cpf?.message}
             errorMessage={!!errors && errors.cpf?.message}
             autoComplete="cpf"
@@ -135,24 +153,28 @@ export function PatientRegistrationForm() {
             {...registerWithMask('cpf', ['999.999.999-99'])}
           />
         </div>
-        <div className="row gap-6">
+        <div className={row}>
+          <label className={label}>Data de nascimento</label>
           <Input
             type="date"
-            label="Data de nascimento"
             placeholder={' '}
             variant="bordered"
             className="w-full h-fit"
             size="lg"
+            radius="sm"
             isInvalid={!!errors.birthdate?.message}
             errorMessage={!!errors && errors.birthdate?.message}
             autoComplete="birth-date"
             {...register('birthdate')}
           />
+        </div>
+        <div className={row}>
+          <label className={label}>Gênero</label>
           <Select
-            label="Gênero"
             placeholder="Selecione um gênero"
             className="w-full h-fit"
-            size="lg"
+            size="sm"
+            radius="sm"
             variant="bordered"
             isInvalid={!!errors.gender?.message}
             errorMessage={!!errors && errors.gender?.message}
@@ -165,12 +187,38 @@ export function PatientRegistrationForm() {
             ))}
           </Select>
         </div>
-        <div className="row gap-6">
-          <Select
-            label="Profissão"
+        <div className={row}>
+          <label className={label}>Profissão</label>
+          <Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            options={PROFESSION_OPTIONS}
+            sx={{ width: 300 }}
+            renderInput={(params) => <TextField {...params} label="Movie" />}
+            {...register('profession')}
+          />
+
+          {/* <Select
+            className="max-w-xs"
+            isLoading={isLoading}
+            items={items}
+            label="Pick a Pokemon"
+            placeholder="Select a Pokemon"
+            scrollRef={scrollerRef}
+            selectionMode="single"
+            onOpenChange={setIsOpen}
+          >
+            {(item) => (
+              <SelectItem key={item.name} className="capitalize">
+                {item.name}
+              </SelectItem>
+            )}
+          </Select> */}
+          {/* <Select
             placeholder="Selecione uma profissão"
             className="w-full h-fit"
-            size="lg"
+            size="sm"
+            radius="sm"
             variant="bordered"
             isInvalid={!!errors.profession?.message}
             errorMessage={!!errors && errors.profession?.message}
@@ -181,59 +229,65 @@ export function PatientRegistrationForm() {
                 {item.label}
               </SelectItem>
             ))}
-          </Select>
+          </Select> */}
+        </div>
+        <div className={row}>
+          <label className={label}>Escolaridade</label>
           <Input
             type="text"
-            label="Escolaridade"
             placeholder="Selecione uma escolaridade"
             variant="bordered"
             className="w-full h-fit"
             size="lg"
+            radius="sm"
             isInvalid={!!errors.education?.message}
             errorMessage={!!errors && errors.education?.message}
             autoComplete="education"
             {...register('education')}
           />
         </div>
-        <div className="row gap-6">
+        <div className={row}>
+          <label className={label}>Celular</label>
           <Input
             type="text"
             variant="bordered"
             className="w-full h-fit"
-            label="Celular"
             placeholder="ex: (99)99999-9999"
             size="lg"
+            radius="sm"
             isInvalid={!!errors.phone?.message}
             errorMessage={!!errors && errors.phone?.message}
             autoComplete="phone"
             {...register('phone')}
             {...registerWithMask('phone', ['(99)99999-9999'])}
           />
+        </div>
+        <div className={row}>
+          <label className={label}>Foto</label>
           <Input
             type="text"
-            label="Foto"
             variant="bordered"
             className="w-full h-fit"
             size="lg"
+            radius="sm"
             isInvalid={!!errors.photo?.message}
             errorMessage={!!errors && errors.photo?.message}
             autoComplete="photo"
             {...register('photo')}
           />
         </div>
-
         <div className="flex flex-row gap-6 w-[50%] h-fit ml-auto">
           <Button
             type="button"
-            isLoading={isLoading}
+            isLoading={false}
             className="w-full h-12 bg-token-danger text-token-white text-medium"
           >
             CANCELAR
           </Button>
           <Button
             type="submit"
-            isLoading={isLoading}
-            className="w-full h-12 bg-token-success text-token-white  text-base"
+            isLoading={false}
+            className="w-full h-12 bg-token-primary text-token-white  text-base"
           >
             CADASTRAR
           </Button>
