@@ -5,7 +5,7 @@ import { Roboto } from 'next/font/google'
 import { usePathname } from 'next/navigation'
 import './globals.css'
 
-import { NextUIProvider } from '@nextui-org/react'
+import { ChakraProvider } from '@chakra-ui/react'
 import { ReactNode } from 'react'
 
 const roboto = Roboto({
@@ -20,7 +20,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body className={roboto.className}>
-        <NextUIProvider>{children}</NextUIProvider>
+        <ChakraProvider>{children}</ChakraProvider>
       </body>
     </html>
   )

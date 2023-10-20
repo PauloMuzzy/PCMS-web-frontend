@@ -1,11 +1,12 @@
 'use client'
 
-import { PatientRegistrationForm } from '@/components'
+import { PatientList, PatientRegistrationForm } from '@/components'
 
 export default function PatientsPage() {
   return (
     <div className="flex flex-col justify-start items-center gap-4 w-full h-full file:overflow-auto p-4">
-      <PatientRegistrationForm />
+      {false && <PatientRegistrationForm />}
+      <PatientList />
     </div>
   )
 }
