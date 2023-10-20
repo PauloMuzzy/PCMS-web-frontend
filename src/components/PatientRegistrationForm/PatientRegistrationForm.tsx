@@ -2,20 +2,35 @@
 
 import { createPatient } from '@/services'
 import {
+  EDUCATION_OPTIONS,
   GENDER_OPTIONS,
   PROFESSION_OPTIONS,
   initialLettersIntoCapitalLetters
 } from '@/utils'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Button, Input, Select, SelectItem } from '@nextui-org/react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { useHookFormMask } from 'use-mask-input'
 import { z } from 'zod'
 
-import Autocomplete from '@mui/material/Autocomplete'
-import TextField from '@mui/material/TextField'
+import {
+  Button,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Input,
+  Select
+} from '@chakra-ui/react'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useState } from 'react'
 
 export function PatientRegistrationForm() {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const MAX_FILE_SIZE = 500000
+  const ACCEPTED_IMAGE_TYPES = [
+    'image/jpeg',
+    'image/jpg',
+    'image/png',
+    'image/webp'
+  ]
+
   const createPatientFormSchema = z.object({
     name: z
       .string()
@@ -51,7 +66,7 @@ export function PatientRegistrationForm() {
       .string()
       .trim()
       .min(1, 'É necessário selecionar a escolaridade!'),
-    photo: z.string()
+    photo: z.any().optional()
   })
 
   type CreatePatientFormData = z.infer<typeof createPatientFormSchema>
@@ -64,230 +79,149 @@ export function PatientRegistrationForm() {
     resolver: zodResolver(createPatientFormSchema)
   })
 
-  const registerWithMask = useHookFormMask(register)
-
   const onSubmit: SubmitHandler<CreatePatientFormData> = async (
     data: CreatePatientFormData
   ): Promise<void> => {
-    // setIsLoading(true)
+    setIsLoading(true)
     try {
       const response = await createPatient(data)
       console.log(response)
     } catch (error) {
       console.log(error)
     } finally {
-      // setIsLoading(false)
+      setIsLoading(false)
     }
   }
 
-  const row = 'flex flex-row justify-between items-start w-full max-h-14'
-  const label = 'flex items-center justify-start w-64 h-full font-medium'
+  const row = 'flex w-full h-fit gap-6'
 
   return (
     <div className="flex flex-col justify-start items-center gap-4 max-w-[1024px] w-full h-fit bg-token-white rounded-lg shadow-xl p-6">
       <form
-        className="flex flex-col gap-8 w-full h-fit p-8"
+        className="flex flex-col gap-4 w-full h-fit p-8 bg-token-gray-100"
         onSubmit={handleSubmit(onSubmit)}
       >
         <h1 className="text-3xl text-token-primary font-bold">
           Cadastro de Paciente
         </h1>
         <div className={row}>
-          <label className={label}>Nome</label>
-          <Input
-            type="text"
-            placeholder="ex: Jhon"
-            variant="bordered"
-            className="w-full h-fit"
-            radius="sm"
-            size="lg"
-            isInvalid={!!errors.name?.message}
-            errorMessage={!!errors && errors.name?.message}
-            autoComplete="name"
-            {...register('name')}
-          />
+          <FormControl isInvalid={!!errors.name}>
+            <FormLabel>Nome</FormLabel>
+            <Input {...register('name')} type="text" size="lg" />
+            <FormErrorMessage>
+              {!!errors && errors.name?.message}
+            </FormErrorMessage>
+          </FormControl>
+          <FormControl isInvalid={!!errors.lastname}>
+            <FormLabel>Sobrenome</FormLabel>
+            <Input {...register('lastname')} type="text" size="lg" />
+            <FormErrorMessage>
+              {!!errors && errors.lastname?.message}
+            </FormErrorMessage>
+          </FormControl>
         </div>
         <div className={row}>
-          <label className={label}>Sobrenome</label>
-          <Input
-            type="text"
-            placeholder="ex: Silva"
-            variant="bordered"
-            className="w-full h-fit"
-            size="lg"
-            radius="sm"
-            isInvalid={!!errors.lastname?.message}
-            errorMessage={!!errors && errors.lastname?.message}
-            autoComplete="last-name"
-            {...register('lastname')}
-          />
+          <FormControl isInvalid={!!errors.email}>
+            <FormLabel>E-mail</FormLabel>
+            <Input {...register('email')} type="text" size="lg" />
+            <FormErrorMessage>
+              {!!errors && errors.email?.message}
+            </FormErrorMessage>
+          </FormControl>
+          <FormControl isInvalid={!!errors.cpf}>
+            <FormLabel>CPF</FormLabel>
+            <Input {...register('cpf')} type="text" size="lg" />
+            <FormErrorMessage>
+              {!!errors && errors.cpf?.message}
+            </FormErrorMessage>
+          </FormControl>
         </div>
         <div className={row}>
-          <label className={label}>E-mail</label>
-          <Input
-            type="text"
-            placeholder="ex: paciente@pcms.com"
-            variant="bordered"
-            className="w-full h-fit"
-            size="lg"
-            radius="sm"
-            isInvalid={!!errors.email?.message}
-            errorMessage={!!errors && errors.email?.message}
-            autoComplete="email"
-            {...register('email')}
-          />
+          <FormControl isInvalid={!!errors.birthdate}>
+            <FormLabel>CPF</FormLabel>
+            <Input {...register('birthdate')} type="date" size="lg" />
+            <FormErrorMessage>{errors.birthdate?.message}</FormErrorMessage>
+          </FormControl>
+          <FormControl isInvalid={!!errors.gender}>
+            <FormLabel>Gênero</FormLabel>
+            <Select
+              {...register('gender')}
+              size="lg"
+              placeholder="Selecione uma gênero"
+            >
+              {GENDER_OPTIONS.map((item, index) => {
+                return (
+                  <option key={index} value={item.value}>
+                    {item.label}
+                  </option>
+                )
+              })}
+            </Select>
+            <FormErrorMessage>
+              {!!errors && errors.gender?.message}
+            </FormErrorMessage>
+          </FormControl>
         </div>
         <div className={row}>
-          <label className={label}>CPF</label>
-          <Input
-            type="text"
-            placeholder="ex: 999.999.999-99"
-            variant="bordered"
-            className="w-full h-full"
-            size="lg"
-            radius="sm"
-            isInvalid={!!errors.cpf?.message}
-            errorMessage={!!errors && errors.cpf?.message}
-            autoComplete="cpf"
-            {...register('cpf')}
-            {...registerWithMask('cpf', ['999.999.999-99'])}
-          />
+          <FormControl isInvalid={!!errors.gender}>
+            <FormLabel>Profissão</FormLabel>
+            <Select
+              {...register('profession')}
+              size="lg"
+              placeholder="Selecione uma profissão"
+            >
+              {PROFESSION_OPTIONS.map((item, index) => {
+                return (
+                  <option key={index} value={item.value}>
+                    {item.label}
+                  </option>
+                )
+              })}
+            </Select>
+            <FormErrorMessage>{errors.profession?.message}</FormErrorMessage>
+          </FormControl>
+          <FormControl isInvalid={!!errors.education}>
+            <FormLabel>Escolaridade</FormLabel>
+            <Select
+              {...register('education')}
+              size="lg"
+              placeholder="Selecione uma escolaridade"
+            >
+              {EDUCATION_OPTIONS.map((item, index) => {
+                return (
+                  <option key={index} value={item.value}>
+                    {item.label}
+                  </option>
+                )
+              })}
+            </Select>
+            <FormErrorMessage>
+              {!!errors && errors.education?.message}
+            </FormErrorMessage>
+          </FormControl>
         </div>
         <div className={row}>
-          <label className={label}>Data de nascimento</label>
-          <Input
-            type="date"
-            placeholder={' '}
-            variant="bordered"
-            className="w-full h-fit"
-            size="lg"
-            radius="sm"
-            isInvalid={!!errors.birthdate?.message}
-            errorMessage={!!errors && errors.birthdate?.message}
-            autoComplete="birth-date"
-            {...register('birthdate')}
-          />
+          <FormControl isInvalid={!!errors.phone}>
+            <FormLabel>Celular</FormLabel>
+            <Input {...register('phone')} type="text" size="lg" />
+            <FormErrorMessage>{errors.phone?.message}</FormErrorMessage>
+          </FormControl>
+          <FormControl isInvalid={!!errors.photo}>
+            <FormLabel>Foto</FormLabel>
+            <Input {...register('photo')} type="file" size="lg" />
+            <FormErrorMessage>
+              {!!errors && errors.photo?.message?.toString()}
+            </FormErrorMessage>
+          </FormControl>
         </div>
-        <div className={row}>
-          <label className={label}>Gênero</label>
-          <Select
-            placeholder="Selecione um gênero"
-            className="w-full h-fit"
-            size="sm"
-            radius="sm"
-            variant="bordered"
-            isInvalid={!!errors.gender?.message}
-            errorMessage={!!errors && errors.gender?.message}
-            {...register('gender')}
-          >
-            {GENDER_OPTIONS.map((item, index) => (
-              <SelectItem key={index} value={item.value}>
-                {item.label}
-              </SelectItem>
-            ))}
-          </Select>
-        </div>
-        <div className={row}>
-          <label className={label}>Profissão</label>
-          <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            options={PROFESSION_OPTIONS}
-            sx={{ width: 300 }}
-            renderInput={(params) => <TextField {...params} label="Movie" />}
-            {...register('profession')}
-          />
-
-          {/* <Select
-            className="max-w-xs"
+        <div className="flex flex-row gap-6 w-[50%] h-fit ml-auto mt-4">
+          <Button
             isLoading={isLoading}
-            items={items}
-            label="Pick a Pokemon"
-            placeholder="Select a Pokemon"
-            scrollRef={scrollerRef}
-            selectionMode="single"
-            onOpenChange={setIsOpen}
-          >
-            {(item) => (
-              <SelectItem key={item.name} className="capitalize">
-                {item.name}
-              </SelectItem>
-            )}
-          </Select> */}
-          {/* <Select
-            placeholder="Selecione uma profissão"
-            className="w-full h-fit"
-            size="sm"
-            radius="sm"
-            variant="bordered"
-            isInvalid={!!errors.profession?.message}
-            errorMessage={!!errors && errors.profession?.message}
-            {...register('profession')}
-          >
-            {GENDER_OPTIONS.map((item, index) => (
-              <SelectItem key={index} value={item.value}>
-                {item.label}
-              </SelectItem>
-            ))}
-          </Select> */}
-        </div>
-        <div className={row}>
-          <label className={label}>Escolaridade</label>
-          <Input
-            type="text"
-            placeholder="Selecione uma escolaridade"
-            variant="bordered"
-            className="w-full h-fit"
-            size="lg"
-            radius="sm"
-            isInvalid={!!errors.education?.message}
-            errorMessage={!!errors && errors.education?.message}
-            autoComplete="education"
-            {...register('education')}
-          />
-        </div>
-        <div className={row}>
-          <label className={label}>Celular</label>
-          <Input
-            type="text"
-            variant="bordered"
-            className="w-full h-fit"
-            placeholder="ex: (99)99999-9999"
-            size="lg"
-            radius="sm"
-            isInvalid={!!errors.phone?.message}
-            errorMessage={!!errors && errors.phone?.message}
-            autoComplete="phone"
-            {...register('phone')}
-            {...registerWithMask('phone', ['(99)99999-9999'])}
-          />
-        </div>
-        <div className={row}>
-          <label className={label}>Foto</label>
-          <Input
-            type="text"
-            variant="bordered"
-            className="w-full h-fit"
-            size="lg"
-            radius="sm"
-            isInvalid={!!errors.photo?.message}
-            errorMessage={!!errors && errors.photo?.message}
-            autoComplete="photo"
-            {...register('photo')}
-          />
-        </div>
-        <div className="flex flex-row gap-6 w-[50%] h-fit ml-auto">
-          <Button
-            type="button"
-            isLoading={false}
-            className="w-full h-12 bg-token-danger text-token-white text-medium"
-          >
-            CANCELAR
-          </Button>
-          <Button
+            colorScheme="blue"
+            variant="solid"
             type="submit"
-            isLoading={false}
-            className="w-full h-12 bg-token-primary text-token-white  text-base"
+            size="lg"
+            width="full"
           >
             CADASTRAR
           </Button>

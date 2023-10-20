@@ -1,5 +1,6 @@
 export * from './Header'
 export * from './Login'
 export * from './Navbar'
+export * from './PatientList'
 export * from './PatientRegistrationForm'
 export * from './PrivateRoute'
