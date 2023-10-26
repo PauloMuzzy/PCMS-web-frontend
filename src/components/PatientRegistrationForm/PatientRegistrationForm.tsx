@@ -21,7 +21,24 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
 
-export function PatientRegistrationForm() {
+type PatientRegistrationForm = {
+  patient?: Patient
+}
+
+type Patient = {
+  name: string
+  lastname: string
+  email: string
+  gender: string
+  birthdate: string
+  cpf: string
+  phone: string
+  profession: string
+  education: string
+  photo?: string
+}
+
+export function PatientRegistrationForm({ patient }: PatientRegistrationForm) {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const MAX_FILE_SIZE = 500000
   const ACCEPTED_IMAGE_TYPES = [
@@ -76,6 +93,17 @@ export function PatientRegistrationForm() {
     handleSubmit,
     formState: { errors }
   } = useForm<CreatePatientFormData>({
+    defaultValues: {
+      name: patient?.name,
+      lastname: patient?.lastname,
+      email: patient?.email,
+      gender: patient?.gender,
+      birthdate: patient?.birthdate,
+      cpf: patient?.cpf,
+      phone: patient?.phone,
+      profession: patient?.profession,
+      education: patient?.education
+    },
     resolver: zodResolver(createPatientFormSchema)
   })
 
@@ -85,7 +113,6 @@ export function PatientRegistrationForm() {
     setIsLoading(true)
     try {
       const response = await createPatient(data)
-      console.log(response)
     } catch (error) {
       console.log(error)
     } finally {
@@ -223,7 +250,7 @@ export function PatientRegistrationForm() {
             size="lg"
             width="full"
           >
-            CADASTRAR
+            {patient ? 'EDITAR' : 'CADASTRAR'}
           </Button>
         </div>
       </form>

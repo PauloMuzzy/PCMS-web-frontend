@@ -10,7 +10,7 @@ export default function RegisterLayout({ children }: { children: ReactNode }) {
       <header className="w-full h-28">
         <Header />
       </header>
-      <main className="w-full h-full col-start-2 bg-token-gray-100">
+      <main className="w-full h-full col-start-2 bg-token-gray-200">
         {children}
       </main>
     </section>
