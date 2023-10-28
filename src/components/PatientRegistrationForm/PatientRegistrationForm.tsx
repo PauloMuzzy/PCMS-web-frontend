@@ -20,33 +20,11 @@ import {
 } from '@chakra-ui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
-
-type PatientRegistrationForm = {
-  patient?: Patient
-}
-
-type Patient = {
-  name: string
-  lastname: string
-  email: string
-  gender: string
-  birthdate: string
-  cpf: string
-  phone: string
-  profession: string
-  education: string
-  photo?: string
-}
+import * as W from './PatientRegistrationForm.styles'
+import { PatientRegistrationForm } from './PatientRegistrationForm.types'
 
 export function PatientRegistrationForm({ patient }: PatientRegistrationForm) {
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const MAX_FILE_SIZE = 500000
-  const ACCEPTED_IMAGE_TYPES = [
-    'image/jpeg',
-    'image/jpg',
-    'image/png',
-    'image/webp'
-  ]
 
   const createPatientFormSchema = z.object({
     name: z
@@ -120,18 +98,11 @@ export function PatientRegistrationForm({ patient }: PatientRegistrationForm) {
     }
   }
 
-  const row = 'flex w-full h-fit gap-6'
-
   return (
-    <div className="flex flex-col justify-start items-center gap-4 max-w-[1024px] w-full h-fit bg-token-white rounded-lg shadow-xl p-6">
-      <form
-        className="flex flex-col gap-4 w-full h-fit p-8 bg-token-gray-100"
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <h1 className="text-3xl text-token-primary font-bold">
-          Cadastro de Paciente
-        </h1>
-        <div className={row}>
+    <W.Wrapper>
+      <W.Form onSubmit={handleSubmit(onSubmit)}>
+        <W.Title>Cadastro de Paciente</W.Title>
+        <W.Row>
           <FormControl isInvalid={!!errors.name}>
             <FormLabel>Nome</FormLabel>
             <Input {...register('name')} type="text" size="lg" />
@@ -146,8 +117,8 @@ export function PatientRegistrationForm({ patient }: PatientRegistrationForm) {
               {!!errors && errors.lastname?.message}
             </FormErrorMessage>
           </FormControl>
-        </div>
-        <div className={row}>
+        </W.Row>
+        <W.Row>
           <FormControl isInvalid={!!errors.email}>
             <FormLabel>E-mail</FormLabel>
             <Input {...register('email')} type="text" size="lg" />
@@ -162,8 +133,8 @@ export function PatientRegistrationForm({ patient }: PatientRegistrationForm) {
               {!!errors && errors.cpf?.message}
             </FormErrorMessage>
           </FormControl>
-        </div>
-        <div className={row}>
+        </W.Row>
+        <W.Row>
           <FormControl isInvalid={!!errors.birthdate}>
             <FormLabel>CPF</FormLabel>
             <Input {...register('birthdate')} type="date" size="lg" />
@@ -188,8 +159,8 @@ export function PatientRegistrationForm({ patient }: PatientRegistrationForm) {
               {!!errors && errors.gender?.message}
             </FormErrorMessage>
           </FormControl>
-        </div>
-        <div className={row}>
+        </W.Row>
+        <W.Row>
           <FormControl isInvalid={!!errors.gender}>
             <FormLabel>Profissão</FormLabel>
             <Select
@@ -226,8 +197,8 @@ export function PatientRegistrationForm({ patient }: PatientRegistrationForm) {
               {!!errors && errors.education?.message}
             </FormErrorMessage>
           </FormControl>
-        </div>
-        <div className={row}>
+        </W.Row>
+        <W.Row>
           <FormControl isInvalid={!!errors.phone}>
             <FormLabel>Celular</FormLabel>
             <Input {...register('phone')} type="text" size="lg" />
@@ -240,8 +211,8 @@ export function PatientRegistrationForm({ patient }: PatientRegistrationForm) {
               {!!errors && errors.photo?.message?.toString()}
             </FormErrorMessage>
           </FormControl>
-        </div>
-        <div className="flex flex-row gap-6 w-[50%] h-fit ml-auto mt-4">
+        </W.Row>
+        <W.ButtonWrapper>
           <Button
             isLoading={isLoading}
             colorScheme="blue"
@@ -252,8 +223,8 @@ export function PatientRegistrationForm({ patient }: PatientRegistrationForm) {
           >
             {patient ? 'EDITAR' : 'CADASTRAR'}
           </Button>
-        </div>
-      </form>
-    </div>
+        </W.ButtonWrapper>
+      </W.Form>
+    </W.Wrapper>
   )
 }
