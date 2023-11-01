@@ -7,6 +7,7 @@ import {
 } from '@chakra-ui/react'
 
 import { PatientRegistrationForm } from '@/components'
+import * as W from './PatientCard.styles'
 
 type PatientCardProps = {
   patient: Patient
@@ -27,35 +28,36 @@ type Patient = {
 
 export function PatientCard({ patient }: PatientCardProps) {
   function hadleChangePatientStatus(email: string) {
-    console.log('trocar email do cliente ->', email)
+    console.log(email)
   }
 
   return (
     <AccordionItem>
-      <h2 className="flex flex-row w-full">
-        <div className="flex flex-row w-full h-fit p-2">
-          <span className="w-52">{patient.name}</span>
-          <span className="w-52">{patient.lastname}</span>
-          <span className="w-full">{patient.email}</span>
-          <span className="w-28">
-            <Button
-              colorScheme="green"
-              variant="outline"
-              onClick={() => {
-                hadleChangePatientStatus(patient.email)
-              }}
-            >
-              Ativo
-            </Button>
-          </span>
-        </div>
-        <div className="w-28 h-full">
+      <W.CardHeader>
+        <W.PatientImageWrapper>
+          <W.PatientImage>PM</W.PatientImage>
+        </W.PatientImageWrapper>
+        <W.PatientName>{patient.name}</W.PatientName>
+        <W.PatientLastname>{patient.lastname}</W.PatientLastname>
+        <W.PatientEmail>{patient.email}</W.PatientEmail>
+        <span>
+          <Button
+            colorScheme="green"
+            variant="outline"
+            onClick={() => {
+              hadleChangePatientStatus(patient.email)
+            }}
+          >
+            Ativo
+          </Button>
+        </span>
+        <W.ShowMoreButtonWrapper>
           <AccordionButton>
             <AccordionIcon />
           </AccordionButton>
-        </div>
-      </h2>
-      <AccordionPanel pb={4}>
+        </W.ShowMoreButtonWrapper>
+      </W.CardHeader>
+      <AccordionPanel pb={4} className="bg-token-gray-200 p-4 overflow-y-auto">
         <PatientRegistrationForm patient={patient} />
       </AccordionPanel>
     </AccordionItem>

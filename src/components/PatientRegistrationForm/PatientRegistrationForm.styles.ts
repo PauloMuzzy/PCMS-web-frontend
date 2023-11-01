@@ -22,7 +22,6 @@ export const Form = w.form(`
   w-full 
   h-fit 
   p-8 
-  bg-token-gray-900
 `)
 
 export const Title = w.h1(`
