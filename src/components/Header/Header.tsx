@@ -1,7 +1,7 @@
 'use client'
 
+import * as W from './Header.styles'
+
 export function Header() {
-  return (
-    <div className="  w-full h-full flex bg-token-white justify-end gap-8 items-center px-10 py-10 shadow-lg "></div>
-  )
+  return <W.Wrapper></W.Wrapper>
 }

@@ -1,12 +1,11 @@
 'use client'
 
 import { useState } from 'react'
+import * as W from './SocialLogin.styles'
 
 export function SocialLogin() {
   const [facebookLoading, setFacebookLoading] = useState<boolean>(false)
   const [googleLoading, setGoogleLoading] = useState<boolean>(false)
 
-  return (
-    <div className="flex flex-col justify-center items-center w-full h-fit gap-unit-sm"></div>
-  )
+  return <W.Wrapper></W.Wrapper>
 }

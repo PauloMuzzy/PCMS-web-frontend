@@ -1,12 +1,13 @@
 'use client'
 
 import { PatientList, PatientRegistrationForm } from '@/components'
+import * as W from './page.styles'
 
 export default function PatientsPage() {
   return (
-    <div className="flex flex-col justify-start items-center gap-4 w-full h-full file:overflow-auto p-4">
+    <W.Wrapper>
       {false && <PatientRegistrationForm />}
       <PatientList />
-    </div>
+    </W.Wrapper>
   )
 }

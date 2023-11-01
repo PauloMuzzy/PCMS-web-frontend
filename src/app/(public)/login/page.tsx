@@ -1,10 +1,11 @@
 'use client'
 import { FormLogin } from '@/components'
+import * as W from './page.styles'
 
 export default function Login() {
   return (
-    <div className="flex justify-center item-center w-screen h-screen">
+    <W.Wrapper>
       <FormLogin />
-    </div>
+    </W.Wrapper>
   )
 }

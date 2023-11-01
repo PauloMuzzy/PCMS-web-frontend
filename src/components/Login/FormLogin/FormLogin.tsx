@@ -5,6 +5,7 @@ import Cookies from 'universal-cookie'
 
 import { userLogin } from '@/services'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import * as W from './FormLogin.stylest'
 
 import { SocialLogin } from '@/components'
 import {
@@ -57,14 +58,9 @@ export function FormLogin() {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center gap-8 w-96 h-fit bg-token-light p-6 rounded-lg my-auto shadow-md">
-      <h1 className="w-full text-left text-3xl text-token-primary font-black">
-        LOGIN
-      </h1>
-      <form
-        className="flex flex-col justify-center items-center w-full h-fit gap-4"
-        onSubmit={handleSubmit(onSubmit)}
-      >
+    <W.Wrapper>
+      <W.Title>LOGIN</W.Title>
+      <W.Form onSubmit={handleSubmit(onSubmit)}>
         <FormControl isInvalid={!!errors.email}>
           <FormLabel>E-mail</FormLabel>
           <Input
@@ -106,10 +102,10 @@ export function FormLogin() {
         >
           ENTRAR
         </Button>
-      </form>
-      <div className="flex flex-col w-full h-fit justify-center items-center gap-4">
+      </W.Form>
+      <W.ButtonWrapper>
         <SocialLogin />
-      </div>
-    </div>
+      </W.ButtonWrapper>
+    </W.Wrapper>
   )
 }
