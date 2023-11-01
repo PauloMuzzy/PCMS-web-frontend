@@ -1,18 +1,17 @@
 import { Header, Navbar } from '@/components'
 import { ReactNode } from 'react'
+import * as W from './page.styles'
 
 export default function RegisterLayout({ children }: { children: ReactNode }) {
   return (
-    <section className="w-screen h-screen grid grid-rows-[112px_auto] grid-cols-[min-content_auto]">
-      <nav className="w-64 h-full row-span-2">
+    <W.Section>
+      <W.Nav>
         <Navbar />
-      </nav>
-      <header className="w-full h-28">
+      </W.Nav>
+      <W.Header>
         <Header />
-      </header>
-      <main className="w-full h-full col-start-2 bg-token-gray-200">
-        {children}
-      </main>
-    </section>
+      </W.Header>
+      <W.Main>{children}</W.Main>
+    </W.Section>
   )
 }

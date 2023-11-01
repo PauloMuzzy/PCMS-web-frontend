@@ -8,6 +8,5 @@ export const Wrapper = w.div(`
   gap-4 
   w-full 
   h-full 
-  file:overflow-auto 
-  p-4
+  overflow-auto 
 `)
