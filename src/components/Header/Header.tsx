@@ -1,7 +1,7 @@
 'use client'
 
-import * as W from './Header.styles'
+import * as S from './Header.styles'
 
 export function Header() {
-  return <W.Wrapper></W.Wrapper>
+  return <S.Wrapper></S.Wrapper>
 }

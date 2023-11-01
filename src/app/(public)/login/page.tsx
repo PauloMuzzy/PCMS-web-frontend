@@ -1,11 +1,11 @@
 'use client'
 import { FormLogin } from '@/components'
-import * as W from './page.styles'
+import * as S from './page.styles'
 
 export default function Login() {
   return (
-    <W.Wrapper>
+    <S.Wrapper>
       <FormLogin />
-    </W.Wrapper>
+    </S.Wrapper>
   )
 }

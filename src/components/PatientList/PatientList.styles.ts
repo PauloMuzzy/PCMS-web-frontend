@@ -1,6 +1,6 @@
-import { w } from 'windstitch'
+import styled from 'windstitch'
 
-export const Wrapper = w.div(`
+export const Wrapper = styled.div(`
   w-full
   h-fit
   bg-token-white
@@ -9,7 +9,7 @@ export const Wrapper = w.div(`
   px-4
 `)
 
-export const CardListHeader = w.div(`
+export const CardListHeader = styled.div(`
   flex 
   flex-row 
   justify-between 

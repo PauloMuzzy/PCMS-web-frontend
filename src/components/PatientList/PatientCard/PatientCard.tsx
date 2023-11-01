@@ -7,7 +7,7 @@ import {
 } from '@chakra-ui/react'
 
 import { PatientRegistrationForm } from '@/components'
-import * as W from './PatientCard.styles'
+import * as S from './PatientCard.styles'
 
 type PatientCardProps = {
   patient: Patient
@@ -33,13 +33,13 @@ export function PatientCard({ patient }: PatientCardProps) {
 
   return (
     <AccordionItem>
-      <W.CardHeader>
-        <W.PatientImageWrapper>
-          <W.PatientImage>PM</W.PatientImage>
-        </W.PatientImageWrapper>
-        <W.PatientName>{patient.name}</W.PatientName>
-        <W.PatientLastname>{patient.lastname}</W.PatientLastname>
-        <W.PatientEmail>{patient.email}</W.PatientEmail>
+      <S.CardHeader>
+        <S.PatientImageWrapper>
+          <S.PatientImage>PM</S.PatientImage>
+        </S.PatientImageWrapper>
+        <S.PatientName>{patient.name}</S.PatientName>
+        <S.PatientLastname>{patient.lastname}</S.PatientLastname>
+        <S.PatientEmail>{patient.email}</S.PatientEmail>
         <span>
           <Button
             colorScheme="green"
@@ -51,13 +51,16 @@ export function PatientCard({ patient }: PatientCardProps) {
             Ativo
           </Button>
         </span>
-        <W.ShowMoreButtonWrapper>
+        <S.ShowMoreButtonWrapper>
           <AccordionButton>
             <AccordionIcon />
           </AccordionButton>
-        </W.ShowMoreButtonWrapper>
-      </W.CardHeader>
-      <AccordionPanel pb={4} className="bg-token-gray-200 p-4 overflow-y-auto">
+        </S.ShowMoreButtonWrapper>
+      </S.CardHeader>
+      <AccordionPanel
+        pb={4}
+        className="bg-token-gray-200 w-full h-fit p-6 overflow-y-auto"
+      >
         <PatientRegistrationForm patient={patient} />
       </AccordionPanel>
     </AccordionItem>

@@ -1,8 +1,6 @@
 import { PatientCard } from '@/components'
 import { Accordion, Button } from '@chakra-ui/react'
-
-import * as W from './PatientList.styles'
-
+import * as S from './PatientList.styles'
 export function PatientList() {
   const Patients = [
     {
@@ -119,18 +117,18 @@ export function PatientList() {
   ]
 
   return (
-    <W.Wrapper>
-      <W.CardListHeader>
+    <S.Wrapper>
+      <S.CardListHeader>
         PACIENTES
         <Button variant={'solid'} size={'md'} colorScheme="blue">
           CADASTRAR +
         </Button>
-      </W.CardListHeader>
+      </S.CardListHeader>
       <Accordion allowToggle>
         {Patients.map((patient, index) => {
           return <PatientCard key={index} patient={patient!} />
         })}
       </Accordion>
-    </W.Wrapper>
+    </S.Wrapper>
   )
 }
