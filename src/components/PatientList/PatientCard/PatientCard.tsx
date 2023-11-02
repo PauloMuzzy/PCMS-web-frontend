@@ -61,7 +61,7 @@ export function PatientCard({ patient }: PatientCardProps) {
         pb={4}
         className="bg-token-gray-200 w-full h-fit p-6 overflow-y-auto"
       >
-        <PatientRegistrationForm patient={patient} />
+        <PatientRegistrationForm />
       </AccordionPanel>
     </AccordionItem>
   )
