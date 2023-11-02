@@ -1,12 +1,11 @@
-import { w } from 'windstitch'
+import styled from 'windstitch'
 
-export const Wrapper = w.div(`
+export const Wrapper = styled.div(`
   flex 
   flex-col 
   justify-start 
   items-center 
   gap-4 
-  max-w-[1024px] 
   w-full 
   h-fit 
   bg-token-white 
@@ -15,7 +14,7 @@ export const Wrapper = w.div(`
   p-6
 `)
 
-export const Form = w.form(`
+export const Form = styled.form(`
   flex 
   flex-col 
   gap-4 
@@ -24,20 +23,20 @@ export const Form = w.form(`
   p-8 
 `)
 
-export const Title = w.h1(`
+export const Title = styled.h1(`
   text-3xl 
   text-token-primary 
   font-bold 
 `)
 
-export const Row = w.div(`
+export const Row = styled.div(`
   flex 
   w-full 
   h-fit 
   gap-6
 `)
 
-export const ButtonWrapper = w.div(`
+export const ButtonWrapper = styled.div(`
   flex 
   flex-row 
   gap-6 

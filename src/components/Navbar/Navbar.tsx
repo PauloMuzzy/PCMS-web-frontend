@@ -1,7 +1,6 @@
 'use client'
-
-import * as W from './Navbar.styles'
+import * as S from './Navbar.styles'
 
 export function Navbar() {
-  return <W.Wrapper></W.Wrapper>
+  return <S.Wrapper></S.Wrapper>
 }

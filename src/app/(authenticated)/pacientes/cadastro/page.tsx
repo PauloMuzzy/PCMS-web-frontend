@@ -1,12 +1,12 @@
 'use client'
 
 import { PatientRegistrationForm } from '@/components'
-import * as W from './page.styles'
+import * as S from './page.styles'
 
 export default function PatientsRegisterPage() {
   return (
-    <W.Wrapper>
+    <S.Wrapper>
       <PatientRegistrationForm />
-    </W.Wrapper>
+    </S.Wrapper>
   )
 }

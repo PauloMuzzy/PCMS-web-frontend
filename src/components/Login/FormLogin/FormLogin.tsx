@@ -5,7 +5,6 @@ import Cookies from 'universal-cookie'
 
 import { userLogin } from '@/services'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import * as W from './FormLogin.stylest'
 
 import { SocialLogin } from '@/components'
 import {
@@ -16,6 +15,7 @@ import {
   Input
 } from '@chakra-ui/react'
 import { useRouter } from 'next/navigation'
+import * as S from './FormLogin.stylest'
 
 export function FormLogin() {
   const [passwordIsVisible, setPasswordIsVisible] = useState<boolean>(false)
@@ -58,9 +58,9 @@ export function FormLogin() {
   }
 
   return (
-    <W.Wrapper>
-      <W.Title>LOGIN</W.Title>
-      <W.Form onSubmit={handleSubmit(onSubmit)}>
+    <S.Wrapper>
+      <S.Title>LOGIN</S.Title>
+      <S.Form onSubmit={handleSubmit(onSubmit)}>
         <FormControl isInvalid={!!errors.email}>
           <FormLabel>E-mail</FormLabel>
           <Input
@@ -102,10 +102,10 @@ export function FormLogin() {
         >
           ENTRAR
         </Button>
-      </W.Form>
-      <W.ButtonWrapper>
+      </S.Form>
+      <S.ButtonWrapper>
         <SocialLogin />
-      </W.ButtonWrapper>
-    </W.Wrapper>
+      </S.ButtonWrapper>
+    </S.Wrapper>
   )
 }

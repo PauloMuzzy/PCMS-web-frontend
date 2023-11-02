@@ -1,13 +1,12 @@
 'use client'
 
-import { PatientList, PatientRegistrationForm } from '@/components'
-import * as W from './page.styles'
+import { PatientList } from '@/components'
+import * as S from './page.styles'
 
 export default function PatientsPage() {
   return (
-    <W.Wrapper>
-      {false && <PatientRegistrationForm />}
+    <S.Wrapper>
       <PatientList />
-    </W.Wrapper>
+    </S.Wrapper>
   )
 }

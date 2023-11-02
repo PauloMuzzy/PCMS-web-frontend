@@ -1,6 +1,6 @@
-import { w } from 'windstitch'
+import styled from 'windstitch'
 
-export const Wrapper = w.div(`
+export const Wrapper = styled.div(`
   flex 
   flex-col 
   justify-center 
@@ -15,7 +15,7 @@ export const Wrapper = w.div(`
   shadow-md
 `)
 
-export const Title = w.h1(`
+export const Title = styled.h1(`
   w-full 
   text-left 
   text-3xl 
@@ -23,7 +23,7 @@ export const Title = w.h1(`
   font-black
 `)
 
-export const Form = w.form(`
+export const Form = styled.form(`
   flex 
   flex-col 
   justify-center 
@@ -33,7 +33,7 @@ export const Form = w.form(`
   gap-4
 `)
 
-export const ButtonWrapper = w.div(`
+export const ButtonWrapper = styled.div(`
   flex 
   flex-col 
   w-full 

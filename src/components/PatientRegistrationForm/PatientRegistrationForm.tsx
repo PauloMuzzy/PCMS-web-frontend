@@ -9,6 +9,7 @@ import {
 } from '@/utils'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { z } from 'zod'
+import * as S from './PatientRegistrationForm.styles'
 
 import {
   Button,
@@ -20,7 +21,6 @@ import {
 } from '@chakra-ui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
-import * as W from './PatientRegistrationForm.styles'
 import { PatientRegistrationForm } from './PatientRegistrationForm.types'
 
 export function PatientRegistrationForm({ patient }: PatientRegistrationForm) {
@@ -99,10 +99,10 @@ export function PatientRegistrationForm({ patient }: PatientRegistrationForm) {
   }
 
   return (
-    <W.Wrapper>
-      <W.Form onSubmit={handleSubmit(onSubmit)}>
-        <W.Title>Cadastro de Paciente</W.Title>
-        <W.Row>
+    <S.Wrapper>
+      <S.Form onSubmit={handleSubmit(onSubmit)}>
+        <S.Title>Cadastro de Paciente</S.Title>
+        <S.Row>
           <FormControl isInvalid={!!errors.name}>
             <FormLabel>Nome</FormLabel>
             <Input {...register('name')} type="text" size="lg" />
@@ -117,8 +117,8 @@ export function PatientRegistrationForm({ patient }: PatientRegistrationForm) {
               {!!errors && errors.lastname?.message}
             </FormErrorMessage>
           </FormControl>
-        </W.Row>
-        <W.Row>
+        </S.Row>
+        <S.Row>
           <FormControl isInvalid={!!errors.email}>
             <FormLabel>E-mail</FormLabel>
             <Input {...register('email')} type="text" size="lg" />
@@ -133,8 +133,8 @@ export function PatientRegistrationForm({ patient }: PatientRegistrationForm) {
               {!!errors && errors.cpf?.message}
             </FormErrorMessage>
           </FormControl>
-        </W.Row>
-        <W.Row>
+        </S.Row>
+        <S.Row>
           <FormControl isInvalid={!!errors.birthdate}>
             <FormLabel>CPF</FormLabel>
             <Input {...register('birthdate')} type="date" size="lg" />
@@ -159,8 +159,8 @@ export function PatientRegistrationForm({ patient }: PatientRegistrationForm) {
               {!!errors && errors.gender?.message}
             </FormErrorMessage>
           </FormControl>
-        </W.Row>
-        <W.Row>
+        </S.Row>
+        <S.Row>
           <FormControl isInvalid={!!errors.gender}>
             <FormLabel>Profissão</FormLabel>
             <Select
@@ -197,8 +197,8 @@ export function PatientRegistrationForm({ patient }: PatientRegistrationForm) {
               {!!errors && errors.education?.message}
             </FormErrorMessage>
           </FormControl>
-        </W.Row>
-        <W.Row>
+        </S.Row>
+        <S.Row>
           <FormControl isInvalid={!!errors.phone}>
             <FormLabel>Celular</FormLabel>
             <Input {...register('phone')} type="text" size="lg" />
@@ -211,8 +211,8 @@ export function PatientRegistrationForm({ patient }: PatientRegistrationForm) {
               {!!errors && errors.photo?.message?.toString()}
             </FormErrorMessage>
           </FormControl>
-        </W.Row>
-        <W.ButtonWrapper>
+        </S.Row>
+        <S.ButtonWrapper>
           <Button
             isLoading={isLoading}
             colorScheme="blue"
@@ -223,8 +223,8 @@ export function PatientRegistrationForm({ patient }: PatientRegistrationForm) {
           >
             {patient ? 'EDITAR' : 'CADASTRAR'}
           </Button>
-        </W.ButtonWrapper>
-      </W.Form>
-    </W.Wrapper>
+        </S.ButtonWrapper>
+      </S.Form>
+    </S.Wrapper>
   )
 }

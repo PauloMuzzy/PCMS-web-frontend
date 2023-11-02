@@ -1,6 +1,6 @@
-import { w } from 'windstitch'
+import styled from 'windstitch'
 
-export const Wrapper = w.div(`
+export const Wrapper = styled.div(`
   flex 
   flex-col 
   justify-center 
