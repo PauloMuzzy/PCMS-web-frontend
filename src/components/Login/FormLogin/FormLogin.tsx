@@ -12,9 +12,12 @@ import {
   FormControl,
   FormErrorMessage,
   FormLabel,
-  Input
+  Input,
+  InputGroup,
+  InputRightElement
 } from '@chakra-ui/react'
 import { useRouter } from 'next/navigation'
+import { EyeFilledIcon, EyeSlashFilledIcon } from '../../../../public/Icons'
 import * as S from './FormLogin.stylest'
 
 export function FormLogin() {
@@ -81,13 +84,25 @@ export function FormLogin() {
         </FormControl>
         <FormControl isInvalid={!!errors.password}>
           <FormLabel>Senha</FormLabel>
-          <Input
-            {...register('password', {
-              required: 'É necessário preencher a senha!'
-            })}
-            type="text"
-            size="lg"
-          />
+          <InputGroup size="md">
+            <Input
+              {...register('password', {
+                required: 'É necessário preencher a senha!'
+              })}
+              size="lg"
+              type={passwordIsVisible ? 'text' : 'password'}
+            />
+            <InputRightElement width="4.5rem" height="full" padding="1">
+              <Button
+                h="full"
+                size="lg"
+                onClick={() => setPasswordIsVisible(!passwordIsVisible)}
+              >
+                {passwordIsVisible ? <EyeFilledIcon /> : <EyeSlashFilledIcon />}
+              </Button>
+            </InputRightElement>
+          </InputGroup>
+
           <FormErrorMessage>
             {!!errors && errors.password?.message}
           </FormErrorMessage>

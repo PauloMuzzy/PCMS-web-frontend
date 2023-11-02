@@ -6,8 +6,8 @@ import {
   Button
 } from '@chakra-ui/react'
 
-import { PatientRegistrationForm } from '@/components'
 import * as S from './PatientCard.styles'
+import PatientData from './PatientData/PatientData'
 
 type PatientCardProps = {
   patient: Patient
@@ -57,11 +57,8 @@ export function PatientCard({ patient }: PatientCardProps) {
           </AccordionButton>
         </S.ShowMoreButtonWrapper>
       </S.CardHeader>
-      <AccordionPanel
-        pb={4}
-        className="bg-token-gray-200 w-full h-fit p-6 overflow-y-auto"
-      >
-        <PatientRegistrationForm patient={patient} />
+      <AccordionPanel pb={4}>
+        <PatientData />
       </AccordionPanel>
     </AccordionItem>
   )

@@ -21,9 +21,8 @@ import {
 } from '@chakra-ui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
-import { PatientRegistrationForm } from './PatientRegistrationForm.types'
 
-export function PatientRegistrationForm({ patient }: PatientRegistrationForm) {
+export function PatientRegistrationForm() {
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const createPatientFormSchema = z.object({
@@ -71,17 +70,6 @@ export function PatientRegistrationForm({ patient }: PatientRegistrationForm) {
     handleSubmit,
     formState: { errors }
   } = useForm<CreatePatientFormData>({
-    defaultValues: {
-      name: patient?.name,
-      lastname: patient?.lastname,
-      email: patient?.email,
-      gender: patient?.gender,
-      birthdate: patient?.birthdate,
-      cpf: patient?.cpf,
-      phone: patient?.phone,
-      profession: patient?.profession,
-      education: patient?.education
-    },
     resolver: zodResolver(createPatientFormSchema)
   })
 
@@ -221,7 +209,7 @@ export function PatientRegistrationForm({ patient }: PatientRegistrationForm) {
             size="lg"
             width="full"
           >
-            {patient ? 'EDITAR' : 'CADASTRAR'}
+            CADASTRAR
           </Button>
         </S.ButtonWrapper>
       </S.Form>

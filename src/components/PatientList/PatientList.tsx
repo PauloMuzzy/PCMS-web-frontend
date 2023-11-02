@@ -1,120 +1,24 @@
-import { PatientCard } from '@/components'
+'use client'
+
 import { Accordion, Button } from '@chakra-ui/react'
+import { useEffect } from 'react'
+import { getPatients } from '../../services/patient/getPatients/getPatients'
 import * as S from './PatientList.styles'
+
 export function PatientList() {
-  const Patients = [
-    {
-      name: 'Paulo',
-      lastname: 'Muzzy',
-      email: 'paulo@muzzy.com.br',
-      gender: 'M',
-      birthdate: '24-05-1991',
-      cpf: '22834196893',
-      phone: '19984242412',
-      profession: 'Acrilista',
-      education: 'GR'
-    },
-    {
-      name: 'Paulo',
-      lastname: 'Muzzy',
-      email: 'paulete@muzzy.com.br',
-      gender: 'M',
-      birthdate: '1991-05-24',
-      cpf: '22834196893',
-      phone: '19984242412',
-      profession: 'Acrilista',
-      education: 'GR'
-    },
-    ,
-    {
-      name: 'Paulo',
-      lastname: 'Muzzy',
-      email: 'paulete@muzzy.com.br',
-      gender: 'M',
-      birthdate: '1991-05-24',
-      cpf: '22834196893',
-      phone: '19984242412',
-      profession: 'Acrilista',
-      education: 'GR'
-    },
-    {
-      name: 'Paulo',
-      lastname: 'Muzzy',
-      email: 'paulete@muzzy.com.br',
-      gender: 'M',
-      birthdate: '1991-05-24',
-      cpf: '22834196893',
-      phone: '19984242412',
-      profession: 'Acrilista',
-      education: 'GR'
-    },
-    {
-      name: 'Paulo',
-      lastname: 'Muzzy',
-      email: 'paulete@muzzy.com.br',
-      gender: 'M',
-      birthdate: '1991-05-24',
-      cpf: '22834196893',
-      phone: '19984242412',
-      profession: 'Acrilista',
-      education: 'GR'
-    },
-    {
-      name: 'Paulo',
-      lastname: 'Muzzy',
-      email: 'paulete@muzzy.com.br',
-      gender: 'M',
-      birthdate: '1991-05-24',
-      cpf: '22834196893',
-      phone: '19984242412',
-      profession: 'Acrilista',
-      education: 'GR'
-    },
-    {
-      name: 'Paulo',
-      lastname: 'Muzzy',
-      email: 'paulete@muzzy.com.br',
-      gender: 'M',
-      birthdate: '1991-05-24',
-      cpf: '22834196893',
-      phone: '19984242412',
-      profession: 'Acrilista',
-      education: 'GR'
-    },
-    {
-      name: 'Paulo',
-      lastname: 'Muzzy',
-      email: 'paulete@muzzy.com.br',
-      gender: 'M',
-      birthdate: '1991-05-24',
-      cpf: '22834196893',
-      phone: '19984242412',
-      profession: 'Acrilista',
-      education: 'GR'
-    },
-    {
-      name: 'Paulo',
-      lastname: 'Muzzy',
-      email: 'paulete@muzzy.com.br',
-      gender: 'M',
-      birthdate: '1991-05-24',
-      cpf: '22834196893',
-      phone: '19984242412',
-      profession: 'Acrilista',
-      education: 'GR'
-    },
-    {
-      name: 'Paulo',
-      lastname: 'Muzzy',
-      email: 'paulete@muzzy.com.br',
-      gender: 'M',
-      birthdate: '1991-05-24',
-      cpf: '22834196893',
-      phone: '19984242412',
-      profession: 'Acrilista',
-      education: 'GR'
+  const getPatientList = async () => {
+    try {
+      const response = await getPatients()
+      console.log(response)
+    } catch (error) {
+      console.log(error)
+    } finally {
     }
-  ]
+  }
+
+  useEffect(() => {
+    getPatientList()
+  })
 
   return (
     <S.Wrapper>
@@ -124,11 +28,7 @@ export function PatientList() {
           CADASTRAR +
         </Button>
       </S.CardListHeader>
-      <Accordion allowToggle>
-        {Patients.map((patient, index) => {
-          return <PatientCard key={index} patient={patient!} />
-        })}
-      </Accordion>
+      <Accordion allowToggle></Accordion>
     </S.Wrapper>
   )
 }
