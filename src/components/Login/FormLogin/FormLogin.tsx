@@ -115,7 +115,7 @@ export function FormLogin() {
           size="lg"
           width="full"
         >
-          ENTRAR
+          LOGIN
         </Button>
       </S.Form>
       <S.ButtonWrapper>
