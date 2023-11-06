@@ -1,6 +1,6 @@
-import styled from 'windstitch'
+import { w } from 'windstitch'
 
-export const Wrapper = styled.div(`
+export const Wrapper = w.div(`
   w-full 
   h-full 
   flex 
@@ -13,6 +13,6 @@ export const Wrapper = styled.div(`
   shadow-lg
 `)
 
-export const Title = styled.div(`
+export const Title = w.div(`
 
 `)

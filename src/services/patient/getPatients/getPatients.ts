@@ -1,4 +1,4 @@
-type Params = {
+export type Patient = {
   name: string
   lastname: string
   email: string

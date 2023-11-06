@@ -1,8 +1,8 @@
-import styled from 'windstitch'
+import { w } from 'windstitch'
 
-export const Wrapper = styled.div(``)
+export const Wrapper = w.div(``)
 
-export const Section = styled.section(`
+export const Section = w.section(`
   w-screen 
   h-screen 
   grid 
@@ -10,24 +10,21 @@ export const Section = styled.section(`
   grid-cols-[max-content_auto]
 `)
 
-export const Nav = styled.nav(`
+export const Nav = w.nav(`
   w-64 
   h-full 
   row-span-2
 `)
 
-export const Header = styled.header(`
+export const Header = w.header(`
   w-full 
   h-28
 `)
 
-export const Main = styled.main(`
+export const Main = w.main(`
   w-full 
   h-full 
   col-start-2 
-  pt-16 
-  pr-6 
-  pb-3 
-  pl-16
-  bg-gradient-to-b from-token-secondary to-token-gray-300
+  bg-token-gray-200
+  p-8
 `)

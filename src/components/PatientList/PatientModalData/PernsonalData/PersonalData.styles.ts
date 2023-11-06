@@ -1,18 +1,6 @@
 import { w } from 'windstitch'
 
-export const Wrapper = w.div(`
-  flex 
-  flex-col 
-  justify-start 
-  items-center 
-  gap-4 
-  w-full 
-  h-fit 
-  bg-token-white 
-  rounded-lg 
-  shadow-xl 
-  p-6
-`)
+export const Wrapper = w.div(``)
 
 export const Form = w.form(`
   flex 
@@ -39,9 +27,6 @@ export const Row = w.div(`
 export const ButtonWrapper = w.div(`
   flex 
   flex-row 
-  gap-6 
-  w-[50%] 
+  w-full
   h-fit 
-  ml-auto 
-  mt-4"
 `)

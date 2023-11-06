@@ -1,2 +1,2 @@
-export * from './PatientList'
 export * from './PatientModalData'
+export * from './PernsonalData'
