@@ -21,6 +21,7 @@ import {
 } from '@nextui-org/react'
 import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { FiAlertCircle } from 'react-icons/fi'
 import { z } from 'zod'
 
 export function PatientRegistration() {
@@ -62,7 +63,29 @@ export function PatientRegistration() {
       .string()
       .trim()
       .min(1, 'É necessário selecionar a escolaridade!'),
-    photo: z.any().optional()
+    photo: z.any().optional(),
+    securitycontactsname: z
+      .string()
+      .trim()
+      .min(1, 'É necessário preencher o nome do contato de emergência!')
+      .transform((securitycontactsname) => {
+        return initialLettersIntoCapitalLetters(securitycontactsname)
+      }),
+    securitycontactslastname: z
+      .string()
+      .trim()
+      .min(1, 'É necessário preencher o sobrenome do contato de emergência!')
+      .transform((securitycontactslastname) => {
+        return initialLettersIntoCapitalLetters(securitycontactslastname)
+      }),
+    securitycontactsphone: z
+      .string()
+      .trim()
+      .min(1, 'É necessário preencher o Telefone do contato de emergência!'),
+    securitycontactslastrelationship: z
+      .string()
+      .trim()
+      .min(1, 'É necessário selecionar o parentesco do contato de emergência!')
   })
 
   type CreatePatientFormData = z.infer<typeof createPatientFormSchema>
@@ -89,11 +112,14 @@ export function PatientRegistration() {
   }
 
   return (
-    <Card className="max-w-[400px]">
+    <Card className="max-w-[800px]">
       <CardHeader>Cadastro de paciente</CardHeader>
       <Divider />
       <CardBody>
-        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="grid grid-cols-2 gap-4"
+        >
           <Input
             {...register('name')}
             type="text"
@@ -174,6 +200,7 @@ export function PatientRegistration() {
             )}
           </Select>
           <Select
+            className="col-start-1"
             {...register('profession')}
             items={PROFESSION_OPTIONS}
             label="Profissão*"
@@ -187,6 +214,7 @@ export function PatientRegistration() {
             )}
           </Select>
           <Textarea
+            className="col-start-1 col-span-2"
             {...register('obs1')}
             label="Observação"
             fullWidth
@@ -194,6 +222,57 @@ export function PatientRegistration() {
             variant={!!errors.obs1 ? 'bordered' : 'flat'}
             errorMessage={!!errors && errors.obs1?.message}
           />
+          <div className="grid grid-cols-2 gap-4 col-span-2 p-4 m-4 rounded-lg border-solid border-1">
+            <span className="flex justify-start items-center gap-2 col-span-2 text-red-600">
+              <FiAlertCircle color="red" /> Contato de emergência
+            </span>
+            <Input
+              {...register('securitycontactsname')}
+              type="text"
+              label="Nome*"
+              isInvalid={!!errors.name}
+              variant="bordered"
+              errorMessage={!!errors && errors.name?.message}
+            />
+            <Input
+              {...register('securitycontactslastname')}
+              type="text"
+              label="Sobrenome*"
+              isInvalid={!!errors.securitycontactslastname}
+              variant={!!errors.securitycontactslastname ? 'bordered' : 'flat'}
+              errorMessage={
+                !!errors && errors.securitycontactslastname?.message
+              }
+            />
+            <Input
+              {...register('securitycontactslastname')}
+              type="text"
+              label="Telefone*"
+              isInvalid={!!errors.securitycontactslastname}
+              variant={!!errors.securitycontactslastname ? 'bordered' : 'flat'}
+              errorMessage={
+                !!errors && errors.securitycontactslastname?.message
+              }
+            />
+            <Select
+              {...register('securitycontactslastrelationship')}
+              items={GENDER_OPTIONS}
+              label="Gênero*"
+              fullWidth
+              isInvalid={!!errors.securitycontactslastrelationship}
+              variant={
+                !!errors.securitycontactslastrelationship ? 'bordered' : 'flat'
+              }
+              errorMessage={
+                !!errors && errors.securitycontactslastrelationship?.message
+              }
+            >
+              {(gender) => (
+                <SelectItem key={gender.value}>{gender.label}</SelectItem>
+              )}
+            </Select>
+          </div>
+          <span>(*) - campos obrigatórios</span>
           <Button
             type="submit"
             color="primary"
@@ -203,7 +282,6 @@ export function PatientRegistration() {
           >
             CADASTRAR
           </Button>
-          (*) - campos obrigatórios
         </form>
       </CardBody>
     </Card>
