@@ -1,12 +1,11 @@
 'use client'
 
-import { PatientList } from '@/components'
-import * as S from './page.styles'
+import { PatientRegistration } from '@/components'
 
 export default function PatientsPage() {
   return (
-    <S.Wrapper>
-      <PatientList />
-    </S.Wrapper>
+    <div>
+      <PatientRegistration />
+    </div>
   )
 }

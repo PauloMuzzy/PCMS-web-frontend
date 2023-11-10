@@ -1,17 +1,16 @@
 import { Header, Navbar } from '@/components'
 import { ReactNode } from 'react'
-import * as S from './page.styles'
 
 export default function RegisterLayout({ children }: { children: ReactNode }) {
   return (
-    <S.Section>
-      <S.Nav>
+    <section>
+      <nav>
         <Navbar />
-      </S.Nav>
-      <S.Header>
+      </nav>
+      <header>
         <Header />
-      </S.Header>
-      <S.Main>{children}</S.Main>
-    </S.Section>
+      </header>
+      <main>{children}</main>
+    </section>
   )
 }

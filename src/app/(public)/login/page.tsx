@@ -1,11 +1,15 @@
 'use client'
 import { FormLogin } from '@/components'
-import * as S from './page.styles'
+import { Card, CardBody } from '@nextui-org/react'
 
 export default function Login() {
   return (
-    <S.Wrapper>
-      <FormLogin />
-    </S.Wrapper>
+    <div className="flex justify-center item-center w-screen h-screen">
+      <Card className="w-[300px] h-fit my-auto p-4">
+        <CardBody>
+          <FormLogin />
+        </CardBody>
+      </Card>
+    </div>
   )
 }

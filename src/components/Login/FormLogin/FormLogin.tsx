@@ -1,27 +1,15 @@
 'use client'
 
+import { userLogin } from '@/services'
+import { Button, Input } from '@nextui-org/react'
 import { useState } from 'react'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import Cookies from 'universal-cookie'
 
-import { userLogin } from '@/services'
-import { SubmitHandler, useForm } from 'react-hook-form'
-
-import { SocialLogin } from '@/components'
-import {
-  Button,
-  FormControl,
-  FormErrorMessage,
-  FormLabel,
-  Input
-} from '@chakra-ui/react'
 import { useRouter } from 'next/navigation'
-import * as S from './FormLogin.stylest'
 
 export function FormLogin() {
-  const [passwordIsVisible, setPasswordIsVisible] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [isVisible, setIsVisible] = useState(false)
-  const toggleVisibility = () => setIsVisible(!isVisible)
   const cookies = new Cookies()
   const { push } = useRouter()
 
@@ -58,54 +46,43 @@ export function FormLogin() {
   }
 
   return (
-    <S.Wrapper>
-      <S.Title>LOGIN</S.Title>
-      <S.Form onSubmit={handleSubmit(onSubmit)}>
-        <FormControl isInvalid={!!errors.email}>
-          <FormLabel>E-mail</FormLabel>
-          <Input
-            {...register('email', {
-              required: 'É necessário preencher o e-mail!',
-              pattern: {
-                value:
-                  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                message: 'E-mail inválido'
-              }
-            })}
-            type="text"
-            size="lg"
-          />
-          <FormErrorMessage>
-            {!!errors && errors.email?.message}
-          </FormErrorMessage>
-        </FormControl>
-        <FormControl isInvalid={!!errors.password}>
-          <FormLabel>Senha</FormLabel>
-          <Input
-            {...register('password', {
-              required: 'É necessário preencher a senha!'
-            })}
-            type="text"
-            size="lg"
-          />
-          <FormErrorMessage>
-            {!!errors && errors.password?.message}
-          </FormErrorMessage>
-        </FormControl>
-        <Button
-          isLoading={isLoading}
-          colorScheme="blue"
-          variant="solid"
-          type="submit"
-          size="lg"
-          width="full"
-        >
-          ENTRAR
+    <div className="flex flex-col gap-3">
+      <h1>LOGIN</h1>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col items-center justify-center gap-3"
+      >
+        <Input
+          {...register('email', {
+            required: 'É necessário preencher o e-mail!',
+            pattern: {
+              value:
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+              message: 'E-mail inválido'
+            }
+          })}
+          name="email"
+          isRequired
+          type="email"
+          label="Email"
+          className="max-w-xs"
+          fullWidth
+        />
+        <Input
+          {...register('password', {
+            required: 'É necessário preencher a senha!'
+          })}
+          name="password"
+          isRequired
+          type="password"
+          label="Senha"
+          className="max-w-xs"
+          fullWidth
+        />
+        <Button type="submit" color="primary" fullWidth isLoading={isLoading}>
+          Loading
         </Button>
-      </S.Form>
-      <S.ButtonWrapper>
-        <SocialLogin />
-      </S.ButtonWrapper>
-    </S.Wrapper>
+      </form>
+    </div>
   )
 }
