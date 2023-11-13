@@ -231,7 +231,7 @@ export function PatientRegistration() {
               type="text"
               label="Nome*"
               isInvalid={!!errors.name}
-              variant="bordered"
+              variant={!!errors.securitycontactslastname ? 'bordered' : 'flat'}
               errorMessage={!!errors && errors.name?.message}
             />
             <Input
