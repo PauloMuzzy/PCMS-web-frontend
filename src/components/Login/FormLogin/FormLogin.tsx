@@ -62,10 +62,11 @@ export function FormLogin() {
             }
           })}
           name="email"
-          isRequired
           type="email"
           label="Email"
-          className="max-w-xs"
+          variant={!!errors.email ? 'bordered' : 'flat'}
+          isInvalid={!!errors.email}
+          errorMessage={!!errors && errors.email?.message}
           fullWidth
         />
         <Input
@@ -73,11 +74,12 @@ export function FormLogin() {
             required: 'É necessário preencher a senha!'
           })}
           name="password"
-          isRequired
           type="password"
           label="Senha"
-          className="max-w-xs"
           fullWidth
+          variant={!!errors.password ? 'bordered' : 'flat'}
+          isInvalid={!!errors.password}
+          errorMessage={!!errors && errors.password?.message}
         />
         <Button type="submit" color="primary" fullWidth isLoading={isLoading}>
           Loading
