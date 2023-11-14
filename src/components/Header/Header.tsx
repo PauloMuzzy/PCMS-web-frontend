@@ -1,5 +1,5 @@
 'use client'
 
 export function Header() {
-  return <div></div>
+  return <div className="w-full h-screen bg-gray-700"></div>
 }

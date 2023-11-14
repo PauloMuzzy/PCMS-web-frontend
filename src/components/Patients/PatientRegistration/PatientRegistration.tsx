@@ -26,7 +26,6 @@ import { z } from 'zod'
 
 export function PatientRegistration() {
   const [isLoading, setIsLoading] = useState<boolean>(false)
-
   const createPatientFormSchema = z.object({
     name: z
       .string()
@@ -112,8 +111,10 @@ export function PatientRegistration() {
   }
 
   return (
-    <Card className="max-w-[800px]">
-      <CardHeader>Cadastro de paciente</CardHeader>
+    <Card className="w-[1024px]">
+      <CardHeader className="text-xl text-gray-500 font-bold p-6">
+        Cadastro de paciente
+      </CardHeader>
       <Divider />
       <CardBody>
         <form
