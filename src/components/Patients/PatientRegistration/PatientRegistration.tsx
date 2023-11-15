@@ -1,10 +1,10 @@
 'use client'
 
+import { SearchProfession } from '@/components/Patients/PatientRegistration/SearchProfession'
 import { createPatient } from '@/services'
 import {
   EDUCATION_OPTIONS,
   GENDER_OPTIONS,
-  PROFESSION_OPTIONS,
   initialLettersIntoCapitalLetters
 } from '@/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -19,13 +19,18 @@ import {
   SelectItem,
   Textarea
 } from '@nextui-org/react'
+
 import { useState } from 'react'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { FiAlertCircle } from 'react-icons/fi'
 import { z } from 'zod'
 
 export function PatientRegistration() {
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [searchModalIsOpen, setSearchModalIsOpen] = useState<boolean>(false)
+
+  const [professionLinst, setProfessionList] =
+    useState<{ value: string; label: string }[]>()
   const createPatientFormSchema = z.object({
     name: z
       .string()
@@ -89,9 +94,37 @@ export function PatientRegistration() {
 
   type CreatePatientFormData = z.infer<typeof createPatientFormSchema>
 
+  function searchProfession(value: string): void {
+    setProfessionList([
+      { value: 'oi', label: 'oi' },
+      { value: 'tchau', label: 'tchau' },
+      { value: 'oi', label: 'oi' },
+      { value: 'tchau', label: 'tchau' },
+      { value: 'oi', label: 'oi' },
+      { value: 'tchau', label: 'tchau' },
+      { value: 'oi', label: 'oi' },
+      { value: 'tchau', label: 'tchau' },
+      { value: 'oi', label: 'oi' },
+      { value: 'tchau', label: 'tchau' },
+      { value: 'oi', label: 'oi' },
+      { value: 'tchau', label: 'tchau' },
+      { value: 'oi', label: 'oi' },
+      { value: 'tchau', label: 'tchau' },
+      { value: 'oi', label: 'oi' },
+      { value: 'tchau', label: 'tchau' },
+      { value: 'oi', label: 'oi' },
+      { value: 'tchau', label: 'tchau' },
+      { value: 'oi', label: 'oi' },
+      { value: 'tchau', label: 'tchau' },
+      { value: 'oi', label: 'oi' },
+      { value: 'tchau', label: 'tchau' }
+    ])
+  }
+
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors }
   } = useForm<CreatePatientFormData>({
     resolver: zodResolver(createPatientFormSchema)
@@ -200,20 +233,37 @@ export function PatientRegistration() {
               <SelectItem key={education.value}>{education.label}</SelectItem>
             )}
           </Select>
-          <Select
-            className="col-start-1"
-            {...register('profession')}
-            items={PROFESSION_OPTIONS}
-            label="Profissão*"
-            fullWidth
-            isInvalid={!!errors.profession}
-            variant={!!errors.profession ? 'bordered' : 'flat'}
-            errorMessage={!!errors && errors.profession?.message}
-          >
-            {(profession) => (
-              <SelectItem key={profession.value}>{profession.label}</SelectItem>
+
+          {/* ######################################################################################## */}
+
+          <Controller
+            control={control}
+            name="profession"
+            render={({ field: { onChange, value } }) => (
+              <>
+                <Input
+                  type="text"
+                  value={value}
+                  label="Profissão*"
+                  placeholder="Clique aqui para buscar uma profissão"
+                  onClick={() => setSearchModalIsOpen(!searchModalIsOpen)}
+                  fullWidth
+                  isInvalid={!!errors.profession}
+                  variant={!!errors.profession ? 'bordered' : 'flat'}
+                  errorMessage={!!errors && errors.profession?.message}
+                  isReadOnly
+                />
+                <SearchProfession
+                  openModal={searchModalIsOpen}
+                  setModalOpen={setSearchModalIsOpen}
+                  setOnChange={onChange}
+                />
+              </>
             )}
-          </Select>
+          />
+
+          {/* ######################################################################################## */}
+
           <Textarea
             className="col-start-1 col-span-2"
             {...register('obs1')}
@@ -231,9 +281,11 @@ export function PatientRegistration() {
               {...register('securitycontactsname')}
               type="text"
               label="Nome*"
-              isInvalid={!!errors.name}
+              isInvalid={!!errors.securitycontactslastname}
               variant={!!errors.securitycontactslastname ? 'bordered' : 'flat'}
-              errorMessage={!!errors && errors.name?.message}
+              errorMessage={
+                !!errors && errors.securitycontactslastname?.message
+              }
             />
             <Input
               {...register('securitycontactslastname')}
