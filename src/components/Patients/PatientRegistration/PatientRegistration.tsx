@@ -2,11 +2,7 @@
 
 import { SearchProfession } from '@/components/Patients/PatientRegistration/SearchProfession'
 import { createPatient } from '@/services'
-import {
-  EDUCATION_OPTIONS,
-  GENDER_OPTIONS,
-  initialLettersIntoCapitalLetters
-} from '@/utils'
+import { EDUCATION_OPTIONS, GENDER_OPTIONS, capitalizeWords } from '@/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
   Button,
@@ -29,22 +25,20 @@ export function PatientRegistration() {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [searchModalIsOpen, setSearchModalIsOpen] = useState<boolean>(false)
 
-  const [professionLinst, setProfessionList] =
-    useState<{ value: string; label: string }[]>()
   const createPatientFormSchema = z.object({
     name: z
       .string()
       .trim()
       .min(1, 'É necessário preencher o nome!')
       .transform((name) => {
-        return initialLettersIntoCapitalLetters(name)
+        return capitalizeWords(name)
       }),
     lastname: z
       .string()
       .trim()
       .min(1, 'É necessário preencher o sobrenome!')
       .transform((lastname) => {
-        return initialLettersIntoCapitalLetters(lastname)
+        return capitalizeWords(lastname)
       }),
     email: z
       .string()
@@ -68,58 +62,31 @@ export function PatientRegistration() {
       .trim()
       .min(1, 'É necessário selecionar a escolaridade!'),
     photo: z.any().optional(),
-    securitycontactsname: z
+    securityContactsName: z
       .string()
       .trim()
       .min(1, 'É necessário preencher o nome do contato de emergência!')
-      .transform((securitycontactsname) => {
-        return initialLettersIntoCapitalLetters(securitycontactsname)
+      .transform((securityContactsName) => {
+        return capitalizeWords(securityContactsName)
       }),
-    securitycontactslastname: z
+    securityContactsLastname: z
       .string()
       .trim()
       .min(1, 'É necessário preencher o sobrenome do contato de emergência!')
-      .transform((securitycontactslastname) => {
-        return initialLettersIntoCapitalLetters(securitycontactslastname)
+      .transform((securityContactsLastname) => {
+        return capitalizeWords(securityContactsLastname)
       }),
-    securitycontactsphone: z
+    securityContactsPhone: z
       .string()
       .trim()
       .min(1, 'É necessário preencher o Telefone do contato de emergência!'),
-    securitycontactslastrelationship: z
+    securityContactslastRelationship: z
       .string()
       .trim()
       .min(1, 'É necessário selecionar o parentesco do contato de emergência!')
   })
 
   type CreatePatientFormData = z.infer<typeof createPatientFormSchema>
-
-  function searchProfession(value: string): void {
-    setProfessionList([
-      { value: 'oi', label: 'oi' },
-      { value: 'tchau', label: 'tchau' },
-      { value: 'oi', label: 'oi' },
-      { value: 'tchau', label: 'tchau' },
-      { value: 'oi', label: 'oi' },
-      { value: 'tchau', label: 'tchau' },
-      { value: 'oi', label: 'oi' },
-      { value: 'tchau', label: 'tchau' },
-      { value: 'oi', label: 'oi' },
-      { value: 'tchau', label: 'tchau' },
-      { value: 'oi', label: 'oi' },
-      { value: 'tchau', label: 'tchau' },
-      { value: 'oi', label: 'oi' },
-      { value: 'tchau', label: 'tchau' },
-      { value: 'oi', label: 'oi' },
-      { value: 'tchau', label: 'tchau' },
-      { value: 'oi', label: 'oi' },
-      { value: 'tchau', label: 'tchau' },
-      { value: 'oi', label: 'oi' },
-      { value: 'tchau', label: 'tchau' },
-      { value: 'oi', label: 'oi' },
-      { value: 'tchau', label: 'tchau' }
-    ])
-  }
 
   const {
     register,
@@ -134,6 +101,7 @@ export function PatientRegistration() {
     data: CreatePatientFormData
   ): Promise<void> => {
     setIsLoading(true)
+    console.log('data ->', data)
     try {
       const response = await createPatient(data)
     } catch (error) {
@@ -267,51 +235,47 @@ export function PatientRegistration() {
             variant={!!errors.obs1 ? 'bordered' : 'flat'}
             errorMessage={!!errors && errors.obs1?.message}
           />
-          <div className="grid grid-cols-2 gap-4 col-span-2 p-4 m-4 rounded-lg border-solid border-1 border-red-600">
+          <div className="grid grid-cols-2 gap-4 col-span-2 p-4 rounded-lg border-solid border-1 border-red-600">
             <span className="flex justify-start items-center gap-2 col-span-2 text-red-600">
               <FiAlertCircle color="red" /> Contato de emergência
             </span>
             <Input
-              {...register('securitycontactsname')}
+              {...register('securityContactsName')}
               type="text"
               label="Nome*"
-              isInvalid={!!errors.securitycontactslastname}
-              variant={!!errors.securitycontactslastname ? 'bordered' : 'flat'}
-              errorMessage={
-                !!errors && errors.securitycontactslastname?.message
-              }
+              isInvalid={!!errors.securityContactsName}
+              variant={!!errors.securityContactsName ? 'bordered' : 'flat'}
+              errorMessage={!!errors && errors.securityContactsName?.message}
             />
             <Input
-              {...register('securitycontactslastname')}
+              {...register('securityContactsLastname')}
               type="text"
               label="Sobrenome*"
-              isInvalid={!!errors.securitycontactslastname}
-              variant={!!errors.securitycontactslastname ? 'bordered' : 'flat'}
+              isInvalid={!!errors.securityContactsLastname}
+              variant={!!errors.securityContactsLastname ? 'bordered' : 'flat'}
               errorMessage={
-                !!errors && errors.securitycontactslastname?.message
+                !!errors && errors.securityContactsLastname?.message
               }
             />
             <Input
-              {...register('securitycontactslastname')}
+              {...register('securityContactsPhone')}
               type="text"
               label="Telefone*"
-              isInvalid={!!errors.securitycontactslastname}
-              variant={!!errors.securitycontactslastname ? 'bordered' : 'flat'}
-              errorMessage={
-                !!errors && errors.securitycontactslastname?.message
-              }
+              isInvalid={!!errors.securityContactsPhone}
+              variant={!!errors.securityContactsPhone ? 'bordered' : 'flat'}
+              errorMessage={!!errors && errors.securityContactsPhone?.message}
             />
             <Select
-              {...register('securitycontactslastrelationship')}
+              {...register('securityContactslastRelationship')}
               items={GENDER_OPTIONS}
               label="Gênero*"
               fullWidth
-              isInvalid={!!errors.securitycontactslastrelationship}
+              isInvalid={!!errors.securityContactslastRelationship}
               variant={
-                !!errors.securitycontactslastrelationship ? 'bordered' : 'flat'
+                !!errors.securityContactslastRelationship ? 'bordered' : 'flat'
               }
               errorMessage={
-                !!errors && errors.securitycontactslastrelationship?.message
+                !!errors && errors.securityContactslastRelationship?.message
               }
             >
               {(gender) => (

@@ -10,7 +10,7 @@ type Params = {
   phone: string
   profession: string
   education: string
-  photo?: string
+  photo?: ''
 }
 
 export async function createPatient(params: Params) {

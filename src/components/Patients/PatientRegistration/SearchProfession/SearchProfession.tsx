@@ -54,7 +54,7 @@ export function SearchProfession({
     if (professionList?.length) {
       return professionList.map((item, index) => {
         return (
-          <Listbox aria-label="Actions">
+          <Listbox aria-label="Actions" key={index}>
             <ListboxItem
               key={index}
               onClick={() => {
