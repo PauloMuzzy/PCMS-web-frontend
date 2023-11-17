@@ -69,7 +69,7 @@ export function SearchProfession({
         )
       })
     }
-    return <span>Nenhuma profissão encontrada</span>
+    return <span>Nenhuma profissão encontrada!</span>
   }
 
   return (
