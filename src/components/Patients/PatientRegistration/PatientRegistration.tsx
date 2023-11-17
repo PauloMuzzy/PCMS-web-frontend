@@ -233,9 +233,6 @@ export function PatientRegistration() {
               <SelectItem key={education.value}>{education.label}</SelectItem>
             )}
           </Select>
-
-          {/* ######################################################################################## */}
-
           <Controller
             control={control}
             name="profession"
@@ -261,9 +258,6 @@ export function PatientRegistration() {
               </>
             )}
           />
-
-          {/* ######################################################################################## */}
-
           <Textarea
             className="col-start-1 col-span-2"
             {...register('obs1')}
@@ -273,7 +267,7 @@ export function PatientRegistration() {
             variant={!!errors.obs1 ? 'bordered' : 'flat'}
             errorMessage={!!errors && errors.obs1?.message}
           />
-          <div className="grid grid-cols-2 gap-4 col-span-2 p-4 m-4 rounded-lg border-solid border-1">
+          <div className="grid grid-cols-2 gap-4 col-span-2 p-4 m-4 rounded-lg border-solid border-1 border-red-600">
             <span className="flex justify-start items-center gap-2 col-span-2 text-red-600">
               <FiAlertCircle color="red" /> Contato de emergência
             </span>

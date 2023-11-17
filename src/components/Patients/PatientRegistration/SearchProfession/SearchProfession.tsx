@@ -36,7 +36,7 @@ export function SearchProfession({
   function getProfessions() {
     setIsLoading(true)
     const list: { value: string; label: string }[] = []
-    if (partialProfession.length) {
+    if (partialProfession.length % 3) {
       PROFESSION_OPTIONS.filter((item, index) => {
         if (item.label.toLocaleLowerCase().includes(partialProfession)) {
           list.push(item)
