@@ -2,6 +2,12 @@
   "extends": [
     "next/core-web-vitals",
     "plugin:storybook/recommended",
-    "plugin:storybook/recommended"
-  ]
+    "plugin:storybook/recommended",
+    "standard-with-typescript"
+  ],
+  "parserOptions": { "project": "./tsconfig.json" },
+  "rules": {
+    "@typesctipt-eslint/consistent-type-definitions": "off",
+    "@typescript-eslint/strict-boolean-expression": "off"
+  }
 }
