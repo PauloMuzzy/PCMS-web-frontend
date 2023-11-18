@@ -1,6 +1,6 @@
 import { AccountModel } from '@/domain'
 
-type AuthenticationParams = {
+export type AuthenticationParams = {
   email: string
   password: string
 }
