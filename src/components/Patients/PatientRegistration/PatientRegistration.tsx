@@ -1,7 +1,6 @@
 'use client'
 
 import { SearchProfession } from '@/components/Patients/PatientRegistration/SearchProfession'
-import { createPatient } from '@/services'
 import { EDUCATION_OPTIONS, GENDER_OPTIONS, capitalizeWords } from '@/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
@@ -103,7 +102,7 @@ export function PatientRegistration() {
     setIsLoading(true)
     console.log('data ->', data)
     try {
-      const response = await createPatient(data)
+      // const response = await createPatient(data)
     } catch (error) {
       console.log(error)
     } finally {
