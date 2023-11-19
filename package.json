@@ -10,7 +10,8 @@
     "test": "jest",
     "test:watch": "npm test -- --watch",
     "test:staged": "npm test -- --findRelatedTests",
-    "test:ci": "npm test -- --coverage"
+    "test:ci": "npm test -- --coverage",
+    "clear_jest": "jest --clearCache"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.2",
