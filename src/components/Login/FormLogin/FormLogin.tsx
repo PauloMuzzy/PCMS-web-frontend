@@ -7,6 +7,9 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import Cookies from 'universal-cookie'
 
 import { useRouter } from 'next/navigation'
+import { DoLoginUseCase } from '@/@core/application/use-cases/login'
+import { LoginHttpGateway } from '@/@core/infra/gatways/login-http.gateway'
+import { makeLogin } from '@/@core/domain/facories/login'
 
 export function FormLogin() {
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -31,18 +34,7 @@ export function FormLogin() {
 
   const onSubmit: SubmitHandler<Data> = async (data: Data): Promise<void> => {
     setIsLoading(true)
-    try {
-      const response = await userLogin({
-        email: data.email,
-        password: data.password
-      })
-      cookies.set('auth_token', response.data.accessToken)
-      push('/pacientes')
-    } catch (error) {
-      console.log(error)
-    } finally {
-      setIsLoading(false)
-    }
+    const accessToken = await makeLogin(data.email, data.password)
   }
 
   return (

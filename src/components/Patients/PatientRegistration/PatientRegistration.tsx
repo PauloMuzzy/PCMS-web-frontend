@@ -100,11 +100,9 @@ export function PatientRegistration() {
     data: CreatePatientFormData
   ): Promise<void> => {
     setIsLoading(true)
-    console.log('data ->', data)
     try {
       // const response = await createPatient(data)
     } catch (error) {
-      console.log(error)
     } finally {
       setIsLoading(false)
     }
