@@ -8,7 +8,7 @@ import Cookies from 'universal-cookie'
 
 import { useRouter } from 'next/navigation'
 import { DoLoginUseCase } from '@/@core/application/use-cases/login'
-import { LoginHttpGateway } from '@/@core/infra/gatways/login-http.gateway'
+import { LoginHttpGateway } from '@/@core/infra/gatways/login-http-client'
 import { makeLogin } from '@/@core/domain/facories/login'
 
 export function FormLogin() {
