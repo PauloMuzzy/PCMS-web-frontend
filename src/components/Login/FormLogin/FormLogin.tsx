@@ -1,19 +1,14 @@
 'use client'
 
-import { userLogin } from '@/services'
 import { Button, Input } from '@nextui-org/react'
 import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import Cookies from 'universal-cookie'
 
+import { makeLogin } from '@/@core/domain/factories/login'
 import { useRouter } from 'next/navigation'
-import { DoLoginUseCase } from '@/@core/application/use-cases/login'
-import { LoginHttpGateway } from '@/@core/infra/gatways/login-http-client'
-import { makeLogin } from '@/@core/domain/facories/login'
 
 export function FormLogin() {
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const cookies = new Cookies()
   const { push } = useRouter()
 
   const {
@@ -34,7 +29,13 @@ export function FormLogin() {
 
   const onSubmit: SubmitHandler<Data> = async (data: Data): Promise<void> => {
     setIsLoading(true)
-    const accessToken = await makeLogin(data.email, data.password)
+    try {
+      await makeLogin(data.email, data.password)
+      push('/pacientes')
+    } catch (error) {
+      console.log(error)
+      setIsLoading(false)
+    }
   }
 
   return (
