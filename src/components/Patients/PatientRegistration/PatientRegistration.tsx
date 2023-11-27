@@ -1,6 +1,6 @@
 'use client'
 
-import { SearchProfession } from '@/components/Patients/PatientRegistration/SearchProfession'
+import SearchProfession from '@/components/Patients/PatientRegistration/SearchProfession/SearchProfession'
 import { EDUCATION_OPTIONS, GENDER_OPTIONS, capitalizeWords } from '@/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
@@ -20,7 +20,7 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { FiAlertCircle } from 'react-icons/fi'
 import { z } from 'zod'
 
-export function PatientRegistration() {
+export default function PatientRegistration() {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [searchModalIsOpen, setSearchModalIsOpen] = useState<boolean>(false)
 

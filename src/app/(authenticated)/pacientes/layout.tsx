@@ -1,4 +1,5 @@
-import { Header, Navbar } from '@/components'
+import Header from '@/components/Header/Header'
+import Navbar from '@/components/Navbar/Navbar'
 import { ReactNode } from 'react'
 
 export default function RegisterLayout({ children }: { children: ReactNode }) {

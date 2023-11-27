@@ -7,7 +7,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { makeLogin } from '@/@core/domain/factories/login'
 import { useRouter } from 'next/navigation'
 
-export function FormLogin() {
+export default function FormLogin() {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const { push } = useRouter()
 

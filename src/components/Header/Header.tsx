@@ -8,7 +8,7 @@ import {
   DropdownTrigger
 } from '@nextui-org/react'
 
-export function Header() {
+export default function Header() {
   return (
     <div className="flex flex-row items-center justify-end w-full h-full px-4 bg-white">
       <Dropdown placement="bottom-end">

@@ -22,7 +22,7 @@ type SearchProfessionProps = {
   setOnChange: (...event: any[]) => void
 }
 
-export function SearchProfession({
+export default function SearchProfession({
   openModal,
   setModalOpen,
   setOnChange

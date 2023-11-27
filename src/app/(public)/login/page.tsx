@@ -1,5 +1,6 @@
 'use client'
-import { FormLogin } from '@/components'
+
+import FormLogin from '@/components/Login/FormLogin/FormLogin'
 import { Card, CardBody } from '@nextui-org/react'
 
 export default function Login() {

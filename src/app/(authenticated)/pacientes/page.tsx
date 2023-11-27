@@ -1,11 +1,7 @@
 'use client'
 
-import { PatientRegistration } from '@/components'
+import PatientRegistration from '@/components/Patients/PatientRegistration/PatientRegistration'
 
 export default function PatientsPage() {
-  return (
-    <div>
-      <PatientRegistration />
-    </div>
-  )
+  return <PatientRegistration />
 }
