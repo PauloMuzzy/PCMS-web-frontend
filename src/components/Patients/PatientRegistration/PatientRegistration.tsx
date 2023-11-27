@@ -1,7 +1,9 @@
 'use client'
 
 import SearchProfession from '@/components/Patients/PatientRegistration/SearchProfession/SearchProfession'
-import { EDUCATION_OPTIONS, GENDER_OPTIONS, capitalizeWords } from '@/utils'
+import { EDUCATION_OPTIONS } from '@/utils/constants/EducationOprions/EducationOptions'
+import { GENDER_OPTIONS } from '@/utils/constants/GenderOptions/GenderOptions'
+import { capitalizeWords } from '@/utils/functions/capitalizeWords/capitalizeWords'
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
   Button,

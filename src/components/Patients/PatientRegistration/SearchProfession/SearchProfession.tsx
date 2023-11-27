@@ -1,6 +1,6 @@
 'use client'
 
-import { PROFESSION_OPTIONS } from '@/utils'
+import { PROFESSION_OPTIONS } from '@/utils/constants/ProfessionOptions/ProfessionOptions'
 import {
   Button,
   CircularProgress,
