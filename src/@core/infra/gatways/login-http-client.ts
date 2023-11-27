@@ -19,7 +19,7 @@ export class LoginHttpGateway implements LoginGateway {
     const response = await this.httpClientAdapter.post<
       RequestParam,
       ResponseParam
-    >(process.env.NEXT_PUBLIC_BASE_URL_PRD + '/v1/auth/login', {
+    >(process.env.NEXT_PUBLIC_BASE_URL + '/v1/auth/login', {
       email,
       password
     })
