@@ -1,8 +1,8 @@
-import { DoLoginUseCase } from '@/@core/application/use-cases/login'
-import { HttpClientAdapter } from '@/@core/infra/adapters/http-client'
-import { StorageAdapter } from '@/@core/infra/adapters/storage'
-import { LoginHttpGateway } from '@/@core/infra/gatways/login-http-client'
-import { StorageClienteGateway } from '@/@core/infra/gatways/storage-client'
+import { DoLoginUseCase } from '@/@core/application/use-cases/login/login'
+import { HttpClientAdapter } from '@/@core/infra/adapters/http/http-client'
+import { StorageAdapter } from '@/@core/infra/adapters/storage/storage'
+import { LoginHttpGateway } from '@/@core/infra/gatways/login/login-http-client'
+import { StorageClienteGateway } from '@/@core/infra/gatways/storage/storage-client'
 
 export const makeLogin = async (email: string, password: string) => {
   const useCase = new DoLoginUseCase(

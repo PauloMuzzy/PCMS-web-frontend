@@ -1,5 +1,5 @@
-import { LoginGateway } from '@/@core/domain/gateways/login'
-import { StorageClient } from '@/@core/domain/gateways/storage-client'
+import { LoginGateway } from '@/@core/domain/gateways/login/login'
+import { StorageClient } from '@/@core/domain/gateways/storage/storage-client'
 
 export class DoLoginUseCase {
   constructor(

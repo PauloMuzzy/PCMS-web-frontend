@@ -1,6 +1,7 @@
 'use client'
 
 import SearchProfession from '@/components/Patients/PatientRegistration/SearchProfession/SearchProfession'
+import { makeCreatePatient } from '@/factories/patient/makeCreatePatient'
 import { EDUCATION_OPTIONS } from '@/utils/constants/EducationOprions/EducationOptions'
 import { GENDER_OPTIONS } from '@/utils/constants/GenderOptions/GenderOptions'
 import { capitalizeWords } from '@/utils/functions/capitalizeWords/capitalizeWords'
@@ -103,7 +104,25 @@ export default function PatientRegistration() {
   ): Promise<void> => {
     setIsLoading(true)
     try {
-      // const response = await createPatient(data)
+      await makeCreatePatient({
+        name: data.name,
+        lastname: data.lastname,
+        email: data.email,
+        gender: data.gender,
+        birthdate: data.birthdate,
+        cpf: data.cpf,
+        phone: data.phone,
+        profession: data.profession,
+        education: data.education,
+        photo: null,
+        obs: data.obs1,
+        securityContact: {
+          name: data.name,
+          lastname: data.lastname,
+          phone: data.phone,
+          relationship: 'qualquer coisa'
+        }
+      })
     } catch (error) {
     } finally {
       setIsLoading(false)
