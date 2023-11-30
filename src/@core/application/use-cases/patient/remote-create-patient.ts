@@ -2,7 +2,7 @@ import { CreatePatientRequestDTO } from '@/@core/domain/DTO/patient/create-patie
 import { LoadAuthTokenGateway } from '@/@core/domain/gateways/auth-token/load-auth-token'
 import { CreatePatientGateway } from '@/@core/domain/gateways/patient/create.patient'
 
-export class CreatePatientUseCase {
+export class RemoteCreatePatientUseCase {
   constructor(
     private createPatientGateway: CreatePatientGateway,
     private loadAuthTokenGateway: LoadAuthTokenGateway
