@@ -1,5 +1,5 @@
 import { CreatePatientRequestDTO } from '@/@core/domain/DTO/patient/create-patient'
-import { CreatePatientGateway } from '@/@core/domain/gateways/patient/create.patient'
+import { CreatePatientGateway } from '@/@core/domain/gateways/patient/create-patient'
 import { HttpClientAdapter } from '@/@core/infra/adapters/http/http-client'
 
 export class CreatePatientHttpClient implements CreatePatientGateway {

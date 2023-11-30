@@ -14,6 +14,6 @@ export class LoginHttpGateway implements LoginGateway {
       method: 'post',
       body: params
     })
-    return response
+    return response.body
   }
 }

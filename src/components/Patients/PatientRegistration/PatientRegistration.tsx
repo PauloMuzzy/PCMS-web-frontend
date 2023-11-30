@@ -2,6 +2,7 @@
 
 import SearchProfession from '@/components/Patients/PatientRegistration/SearchProfession/SearchProfession'
 import { makeCreatePatient } from '@/factories/patient/makeCreatePatient'
+import { makeListPatients } from '@/factories/patient/makeListPatients'
 import { EDUCATION_OPTIONS } from '@/utils/constants/EducationOprions/EducationOptions'
 import { GENDER_OPTIONS } from '@/utils/constants/GenderOptions/GenderOptions'
 import { capitalizeWords } from '@/utils/functions/capitalizeWords/capitalizeWords'
@@ -18,7 +19,7 @@ import {
   Textarea
 } from '@nextui-org/react'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { FiAlertCircle } from 'react-icons/fi'
 import { z } from 'zod'
@@ -128,6 +129,15 @@ export default function PatientRegistration() {
       setIsLoading(false)
     }
   }
+
+  async function fazmerda() {
+    const response = await makeListPatients({ itemsPerPage: 1, limit: 1 })
+    console.log(response)
+  }
+
+  useEffect(() => {
+    fazmerda()
+  })
 
   return (
     <Card className="w-[1024px]">

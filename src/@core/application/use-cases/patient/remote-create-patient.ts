@@ -1,6 +1,6 @@
 import { CreatePatientRequestDTO } from '@/@core/domain/DTO/patient/create-patient'
 import { LoadAuthTokenGateway } from '@/@core/domain/gateways/auth-token/load-auth-token'
-import { CreatePatientGateway } from '@/@core/domain/gateways/patient/create.patient'
+import { CreatePatientGateway } from '@/@core/domain/gateways/patient/create-patient'
 
 export class RemoteCreatePatientUseCase {
   constructor(

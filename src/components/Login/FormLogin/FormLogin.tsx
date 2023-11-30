@@ -30,7 +30,7 @@ export default function FormLogin() {
   const onSubmit: SubmitHandler<Data> = async (data: Data): Promise<void> => {
     setIsLoading(true)
     try {
-      await makeLogin(data.email, data.password)
+      await makeLogin({ email: data.email, password: data.password })
       push('/pacientes')
     } catch (error) {
       console.log(error)
