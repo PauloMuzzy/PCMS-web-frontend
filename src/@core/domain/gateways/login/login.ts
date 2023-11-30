@@ -1,5 +1,8 @@
-import { LoginResponseDTO } from '@/@core/domain/DTO/login/login'
+import {
+  LoginRequestDTO,
+  LoginResponseDTO
+} from '@/@core/domain/DTO/login/login'
 
 export interface LoginGateway {
-  doLogin(email: string, password: string): Promise<LoginResponseDTO>
+  login(params: LoginRequestDTO): Promise<LoginResponseDTO>
 }

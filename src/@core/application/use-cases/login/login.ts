@@ -1,14 +1,15 @@
+import { LoginRequestDTO } from '@/@core/domain/DTO/login/login'
+import { SaveAuthTokenGateway } from '@/@core/domain/gateways/auth-token/save-auth-token'
 import { LoginGateway } from '@/@core/domain/gateways/login/login'
-import { StorageClient } from '@/@core/domain/gateways/storage/storage-client'
 
-export class DoLoginUseCase {
+export class LoginUseCase {
   constructor(
     private loginGateway: LoginGateway,
-    private storageClient: StorageClient
+    private saveAuthTokenGateway: SaveAuthTokenGateway
   ) {}
 
-  async execute(email: string, password: string): Promise<void> {
-    const { accessToken } = await this.loginGateway.doLogin(email, password)
-    this.storageClient.saveToken(accessToken)
+  async execute(params: LoginRequestDTO): Promise<void> {
+    const { accessToken } = await this.loginGateway.login(params)
+    this.saveAuthTokenGateway.save(accessToken)
   }
 }

@@ -1,3 +1,3 @@
 export interface ILoadStorageAdapter {
-  loadStorage(key: string): string
+  load(key: string): string
 }
