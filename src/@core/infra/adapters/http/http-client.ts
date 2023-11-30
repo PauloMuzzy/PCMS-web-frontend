@@ -15,7 +15,7 @@ export class HttpClientAdapter implements IHttpClientAdapter {
       })
       return response.data
     } catch {
-      throw new Error('erro ao tentar fazer login')
+      throw new Error('erro')
     }
   }
 }
