@@ -4,7 +4,7 @@ import { Button, Input } from '@nextui-org/react'
 import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
-import { makeLogin } from '@/factories/login/makeLogin'
+import { makeLogin } from '@/factories2/login/makeLogin'
 import { useRouter } from 'next/navigation'
 
 export default function FormLogin() {
